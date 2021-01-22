@@ -1,0 +1,42 @@
+    <section style="background:  #f4f8fa;">
+      <div class="container">
+        <div class="row py-5">
+          <div class="left col-lg-4">
+            <div class="text-center py-3" style="background: white;">
+              <img src="https://picsum.photos/150/150" alt="" class="mb-3">
+              <p><%= @request.user.username%></p>
+              <p>最終ログイン：</p>
+              
+              <%= link_to "プロフィール", user_path(@request.user), class:"btn btn-info w-75 mb-1"  %>
+              <!--<button type="button" class="btn btn-info w-75 mb-3">プロフィール</button>-->
+
+              
+              <% if @request.user.id != current_user.id %>
+              <button type="button" class="btn btn-info w-75">提案する</button>
+              <% end %>
+            </div>
+          </div>
+          <div class="right col-lg-8 px-3" style="background: white;">
+            <div class="detail-top">
+              <div class="detail-title px-2 py-4">
+                <p class="mb-0" style="font-weight: bold;"><%= @request.title %></p>
+              </div>
+                <div class="row ml-2">
+                  <div class="col-4 mx-1 py-1" style="background: #f4f8fa;">予算：<%= @request.budget %></div>
+                  <div class="col-4 mx-1 py-1" style="background: #f4f8fa;">提案数：</div>
+                  <p class="my-3 px-1"><%= simple_format @request.text %></p>
+                </div>
+                <% if @request.user.id == current_user.id %>
+                <div class="text-center">
+                　<%= link_to "編集する", edit_request_path(@request), class:"btn btn-info"%>
+                　<%= link_to "削除する", request_path(@request), method: :delete, data: {confirm: "削除しますか"}, class:"btn btn-danger" %>
+                </div>
+                <% else %>
+                <div class="text-center">
+                  <button class="btn btn-info w-75">提案する</button>
+                </div>
+                <% end %>
+          </div>
+        </div>
+      </div>
+    </section>

@@ -1,0 +1,74 @@
+    <main>
+      <section style="background: #f4f8fa;">
+        <div class="container">
+          <div class="row py-5 px-3">
+            <div class="left col-md-7 pt-4">
+              <h1>あなたの悩みを<br>解決できる人を見つけよう</h1>
+              <p class="py-3">悩みがある人×解決できるスキルを持った人のマッチング(個人間取引)</p>
+              <button type="button" class="btn btn-info btn-lg px-4">いますぐはじめる</button>
+            </div>
+            <div class="right col-md-5">
+              <img src= "https://picsum.photos/id/237/550/280">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="my-5">
+        <div class="container">
+          <div class="text-center">
+            <h2>SOLVE とは？</h2>
+            <p class="mb-0">「お金を払ってでも解決したいことがあるユーザー」と「解決できるスキルや知識を持ったユーザー」をマッチング！</p>
+            <p>個人間取引(CtoC)でリーズナブルに依頼ができるサービスです。</p>
+          </div>
+          <div class="row text-center mt-5">
+            <div class="col-md-4">
+              <h3>個別の解決策</h3>
+              <img src="https://picsum.photos/150/150" alt="">
+              <p class="py-2 px-2">あなたが悩んでいることをダイレクトに相談して、マンツーマンで解決までたどり着くことができます。</p>
+            </div>
+            <div class="col-md-4">
+              <h3>リーズナブル</h3>
+              <img src="https://picsum.photos/150/150" alt="">
+              <p class="py-2 px-2">企業ではなく、個人と直契約するため<br>リーズナブルな取引ができます。</p>
+            </div>
+            <div class="col-md-4">
+              <h3>安心・安全</h3>
+              <img src="https://picsum.photos/150/150" alt="">
+              <p class="py-2 px-2">不正な取引や詐欺を防ぐため、<br>全てのお取引に運営が仲介します。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-5" style="background: #f4f8fa;">
+        <div class="container">
+          <h3 class="text-center pb-3">新着の依頼</h3>
+            <div class="row ">
+            <% @requests.each do |request| %>
+              <div class="col-md-6">
+                <div class="card w-75 mx-auto my-3">
+                  <div class="card-body">
+                  <%= link_to request_path(request) do %>
+                    <h5 class="card-title"><%= request.title %></h5>
+                  <% end %>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= request.user.username %></h6>
+                    <p class="card-text small"><%= request.text %> </p>
+                    <div style="background: #43acff;">
+                      <p class="card-text small py-1 px-1 mb-1" style="color: white;">予算：<%= request.budget %></p>
+                    </div>
+                    <div style="background: #43acff;">
+                      <p class="card-text small py-1 px-1" style="color: white;">提案数：◯◯</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="cover text-white text-center py-4">
+            <a href="" class="btn btn-info btn-lg" style="width: 300px;">もっと見る</a>
+          </div>
+        </div>
+      </section>
+    </main>

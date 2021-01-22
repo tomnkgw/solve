@@ -1,0 +1,35 @@
+<section style="background:  #f4f8fa;;">
+  <div class="container">
+    <div class="row py-5">
+      <div class="left col-md-4">
+        <div class="text-center py-3" style="background: white;">
+          <img src="https://picsum.photos/150/150" alt="" class="mb-3">
+          <p>ユーザーネーム</p>
+          <p>最終ログイン：</p>
+          <button type="button" class="btn btn-info w-75 mb-3">プロフィール</button>
+        </div>
+      </div>
+      <div class="right col-md-8 px-3" style="background: white;">
+        <h4 class="my-4 text-info" style="font-weight: bold;">依頼を作成する</h4>
+          <%= form_for @request do |f| %>
+            <div class="form-group my-3">
+                <%= f.label :"依頼のタイトル",class:"text-info" %><br>
+                <%= f.text_field :title,class:"w-100" %>
+            </div>
+            <div class="form-group my-3">
+                <%= f.label :"予算", class:"text-info" %><br>
+                <%= f.text_field :budget, class:"w-100" %>
+            </div>
+            <div class="form-group my-3">
+                <%= f.label :"依頼の詳細", class:"text-info" %><br>
+                <%= f.text_area :text, class:"w-100", rows:"15" %>
+            </div>
+            <div class="text-center">
+                <%= f.submit "投稿する", class:"btn btn-info" %>
+            </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+    

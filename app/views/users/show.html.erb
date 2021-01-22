@@ -1,0 +1,57 @@
+    <div class="container">
+     <div class="row">
+      <div class="col-md-4 text-center py-3" style="background: white;">
+        <%= attachment_image_tag @user, :profile_image, fallback: "no-image.png"%>
+        <p><%= @user.username %></p>
+        <p>最終ログイン：</p>
+        <% if @user.id == current_user.id %>
+        <%= link_to "プロフィールを編集する", edit_user_path(@user), class:"btn btn-info"%>
+        <% end %>
+      </div>
+      <div class="col-md-8">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">自己紹介</a>
+            </li>
+            <% if @user.id == current_user.id %>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">自分の投稿</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">お気に入り</a>
+            </li>
+            <% end %>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active px-3 py-2" id="home" role="tabpanel" aria-labelledby="home-tab"><%= @user.profile %></div>
+            <div class="tab-pane fade px-3 py-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              
+              <div class="row">
+              <% @user.requests.each do |request|%>
+              <div class="col-md-5">
+                <div class="card w-75 mx-auto my-3">
+                  <div class="card-body">
+                  <%= link_to request_path(request) do %>
+                    <h5 class="card-title"><%= request.title %></h5>
+                  <% end %>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= request.user.username %></h6>
+                    <p class="card-text small"><%= request.text %> </p>
+                    <div style="background: #43acff;">
+                      <p class="card-text small py-1 px-1 mb-1" style="color: white;">予算：<%= request.budget %></p>
+                    </div>
+                    <div style="background: #43acff;">
+                      <p class="card-text small py-1 px-1" style="color: white;">提案数：◯◯</p>
+                    </div>
+                  </div>
+                </div>
+              </div>                
+
+              
+              <% end %>
+            </div>
+            <div class="tab-pane fade px-3 py-2" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+          </div>
+      </div>
+      
+     </div>
+    </div>

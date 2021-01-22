@@ -1,0 +1,34 @@
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-10">
+                <div id="login-box" class="col-md-12">
+                  <main style="background: #f4f8fa;" class="px-5 py-3 mb-3">
+                        <h3 class="text-center text-info pb-3">プロフィール設定</h3>
+                        <%= form_for @user do |f| %>
+                        <div class="form-group my-3">
+                            <%= f.label :username,"ユーザーネーム", class:"text-info" %><br>
+                            <%= f.text_field :username, class: "input w-100" %>
+                        </div>
+
+                        <div class="form-group my-3">
+                            <%= f.label :email ,"メールアドレス", class:"text-info" %><br>
+                            <%= f.text_field :email, class:"input w-100" %>
+                        </div>
+
+                        <div class="form-group my-3">
+                            <%= f.label :profile, "自己紹介", class:"text-info" %><br>
+                            <%= f.text_area :profile, class:"textarea w-100" , rows: "15"%>
+                        </div>
+
+                        <div class="form-group my-3">
+                            <%= f.label :profile_image, "プロフィール画像", class:"text-info" %><br>
+                            <%= f.attachment_field :profile_image, class: "input" %>
+                        </div>
+                      <div class="text-center my-4">
+                        <%= f.submit "プロフィールを更新する", class:"btn btn-info" %>
+                      </div>
+                      <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
