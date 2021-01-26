@@ -10,7 +10,7 @@
                 <li class="nav-item"><a href="" class="nav-link py-1 pl-4">メッセージ</a></li>
                 <li class="nav-item"><a href="" class="nav-link py-1 pl-4">お気に入り</a></li>
                 <li class="nav-item"><a href="" class="nav-link py-1 pl-4">設定</a></li>
-                <li class="nav-item"><a href="" class="nav-link py-1 pl-4">ログアウト</a></li>
+                <li class="nav-item">ログアウト</li>
               </ul>
             </nav>  
           </div>
@@ -38,6 +38,16 @@
                     </div>
                     <div style="background: #43acff;">
                       <p class="card-text small py-1 px-1" style="color: white;">提案数：◯◯</p>
+                    </div>
+                    <div style="background: #43acff;">
+                      <p class="card-text small py-1 px-1" style="color: white;">お気に入り：
+                      <% if current_user.already_favorited?(request) %>
+                        <%= link_to 'いいねを外す', request_favorite_path(request), method: :delete %>
+                        <% else %>
+                        <%= link_to "いいね",request_favorites_path(request), method: :post %>
+                      <% end %>
+                      <%= request.favorites.count %>
+                      </p>
                     </div>
                   </div>
                 </div>

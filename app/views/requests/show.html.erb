@@ -6,11 +6,7 @@
               <img src="https://picsum.photos/150/150" alt="" class="mb-3">
               <p><%= @request.user.username%></p>
               <p>最終ログイン：</p>
-              
               <%= link_to "プロフィール", user_path(@request.user), class:"btn btn-info w-75 mb-1"  %>
-              <!--<button type="button" class="btn btn-info w-75 mb-3">プロフィール</button>-->
-
-              
               <% if @request.user.id != current_user.id %>
               <button type="button" class="btn btn-info w-75">提案する</button>
               <% end %>
@@ -18,22 +14,46 @@
           </div>
           <div class="right col-lg-8 px-3" style="background: white;">
             <div class="detail-top">
-              <div class="detail-title px-2 py-4">
+              <div class="detail-title px-2 py-2">
                 <p class="mb-0" style="font-weight: bold;"><%= @request.title %></p>
               </div>
                 <div class="row ml-2">
-                  <div class="col-4 mx-1 py-1" style="background: #f4f8fa;">予算：<%= @request.budget %></div>
-                  <div class="col-4 mx-1 py-1" style="background: #f4f8fa;">提案数：</div>
+                  <div class="col-5 mx-2 my-2" style="background: #f4f8fa;">予算：<%= @request.budget %></div>
+                  <div class="col-5 mx-2 my-2" style="background: #f4f8fa;">提案数：</div><br>
                   <p class="my-3 px-1"><%= simple_format @request.text %></p>
                 </div>
                 <% if @request.user.id == current_user.id %>
                 <div class="text-center">
-                　<%= link_to "編集する", edit_request_path(@request), class:"btn btn-info"%>
-                　<%= link_to "削除する", request_path(@request), method: :delete, data: {confirm: "削除しますか"}, class:"btn btn-danger" %>
+                　<%= link_to "編集する", edit_request_path(@request), class:"btn btn-info mb-2"%>
+                　<%= link_to "削除する", request_path(@request), method: :delete, data: {confirm: "削除しますか"}, class:"btn btn-danger mb-2" %>
+                </div>
+                <div class="accordion" id="accordionExample">
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          提案を確認する
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                      <div class="card-body">
+                        <% @request.proposals.each do |proposal|%>
+                        <div class="form-group py-2 px-2 my-3" style="border: solid 1px;">
+                          <label for="exampleFormControlTextarea1"></label>
+                          <p class="my-4"><%= proposal.text%> </p>
+                          <div class="text-center">
+                            <button type="button" class="btn btn-info px-4 mb-2"><span style="font-weight: bold;"><%= proposal.user.username %></span>さんにメッセージを送る</button>
+                          </div>
+                        </div>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <% else %>
                 <div class="text-center">
-                  <button class="btn btn-info w-75">提案する</button>
+                  <%= link_to "提案する", new_request_proposal_path(@request), class:"btn btn-info" %>
                 </div>
                 <% end %>
           </div>

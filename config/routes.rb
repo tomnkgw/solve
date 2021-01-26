@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users
   resources :requests do
     resources :proposals
+    resources :favorites, only: [:create, :destroy]
   end
   
 end
