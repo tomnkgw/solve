@@ -12,7 +12,7 @@
               <% end %>
             </div>
           </div>
-          <div class="right col-lg-8 px-3" style="background: white;">
+          <div class="right col-lg-8" style="background: white;">
             <div class="detail-top">
               <div class="detail-title px-2 py-2">
                 <p class="mb-0" style="font-weight: bold;"><%= @request.title %></p>
@@ -32,13 +32,13 @@
                     <div class="card-header" id="headingOne">
                       <h5 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                          提案を確認する
+                          提案を確認する(<%= @request.proposals.count %>件)
                         </button>
                       </h5>
                     </div>
+                    <% @request.proposals.each do |proposal|%>
                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                       <div class="card-body">
-                        <% @request.proposals.each do |proposal|%>
                         <div class="form-group py-2 px-2 my-3" style="border: solid 1px;">
                           <label for="exampleFormControlTextarea1"></label>
                           <p class="my-4"><%= proposal.text%> </p>

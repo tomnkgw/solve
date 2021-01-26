@@ -5,7 +5,11 @@
             <div class="left col-md-7 pt-4">
               <h1>あなたの悩みを<br>解決できる人を見つけよう</h1>
               <p class="py-3">悩みがある人×解決できるスキルを持った人のマッチング(個人間取引)</p>
-              <button type="button" class="btn btn-info btn-lg px-4">いますぐはじめる</button>
+              <% if user_signed_in? %>
+                <%= link_to "依頼をしてみる", new_request_path ,class:"brn btn-info btn-lg px-4"%>
+              <% else %>
+                <%= link_to "いますぐはじめる", new_user_registration_path ,class:"brn btn-info btn-lg px-4"%>
+              <% end %>
             </div>
             <div class="right col-md-5">
               <img src= "https://picsum.photos/id/237/550/280">
