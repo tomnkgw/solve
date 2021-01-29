@@ -5,6 +5,9 @@ class RoomsController < ApplicationController
     @rooms = Room.where(request: requests).or(Room.where(proposal: proposals)).order(latest_message_created_at: :desc)
   end
   
+  def show
+  end
+  
   def create
     request = current_user.requests.find(params[:request_id])
     proposal = request.proposals.find(params[:proposal_id])

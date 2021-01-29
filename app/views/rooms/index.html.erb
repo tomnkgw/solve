@@ -6,6 +6,7 @@
         <th scope="col">アイコン/ユーザー名</a></th>              
         <th scope="col">依頼のタイトル</th>
         <th scope="col">最新日時</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -14,6 +15,7 @@
           <td><%= room.request.user == current_user ? room.proposal.user.username : room.request.user.username %></td>
           <td><a href="#"><%= room.request.title %></a></td>
           <td><%= room.latest_message_created_at.present? ? room.latest_message_created_at.strftime("%Y/%m/%d %H:%M") : '' %></td>
+          <td><%= link_to 'メッセージを見る', room_path(room) %></td>
         </tr>
       <% end %>
     </tbody>
