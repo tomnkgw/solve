@@ -9,33 +9,37 @@
         <% end %>
       </div>
       <div class="col-md-8">
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">自己紹介</a>
+          </li>
+          <% if @user.id == current_user.id %>
             <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">自己紹介</a>
-            </li>
-            <% if @user.id == current_user.id %>
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">自分の投稿</a>
+              <a class="nav-link" id="request-tab" data-toggle="tab" href="#request" role="tab" aria-controls="request" aria-selected="false">自分の依頼</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">お気に入り</a>
+              <a class="nav-link" id="proposal-tab" data-toggle="tab" href="#proposal" role="tab" aria-controls="proposal" aria-selected="false">提案済の依頼</a>
             </li>
-            <% end %>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active px-3 py-2" id="home" role="tabpanel" aria-labelledby="home-tab"><%= @user.profile %></div>
-            <div class="tab-pane fade px-3 py-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              
-              <div class="row">
+            <li class="nav-item">
+              <a class="nav-link" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="false">お気に入り</a>
+            </li>
+          <% end %>
+        </ul>
+          
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active px-3 py-2" id="home" role="tabpanel" aria-labelledby="home-tab"><%= @user.profile %></div>
+            
+          <div class="tab-pane fade px-3 py-2" id="request" role="tabpanel" aria-labelledby="request-tab">
+            <div class="row">
               <% @user.requests.each do |request|%>
               <div class="col-md-5">
                 <div class="card w-75 mx-auto my-3">
                   <div class="card-body">
-                  <%= link_to request_path(request) do %>
-                    <h5 class="card-title"><%= request.title %></h5>
-                  <% end %>
+                    <%= link_to request_path(request) do %>
+                      <h5 class="card-title"><%= request.title %></h5>
+                    <% end %>
                     <h6 class="card-subtitle mb-2 text-muted"><%= request.user.username %></h6>
-                    <p class="card-text small"><%= request.text %> </p>
+                    <!--<p class="card-text small">request.text </p>-->
                     <div style="background: #43acff;">
                       <p class="card-text small py-1 px-1 mb-1" style="color: white;">予算：<%= request.budget %></p>
                     </div>
@@ -45,12 +49,39 @@
                   </div>
                 </div>
               </div>                
-
-              
               <% end %>
             </div>
-            <div class="tab-pane fade px-3 py-2" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
           </div>
+          
+          <div class="tab-pane fade show active px-3 py-2" id="proposal" role="tabpanel" aria-labelledby="proposal-tab">
+            
+          </div>
+          
+          <div class="tab-pane fade px-3 py-2" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
+            <div class="row">
+              <% @favorite_list.each do |post|%>
+              <div class="col-md-5">
+                <div class="card w-75 mx-auto my-3">
+                  <div class="card-body">
+                  <%= link_to request_path(post) do %>
+                    <h5 class="card-title"><%= post.title %></h5>
+                  <% end %>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= post.user.username %></h6>
+                    <!--<p class="card-text small">post.text </p>-->
+                    <div style="background: #43acff;">
+                      <p class="card-text small py-1 px-1 mb-1" style="color: white;">予算：<%= post.budget %></p>
+                    </div>
+                    <div style="background: #43acff;">
+                      <p class="card-text small py-1 px-1" style="color: white;">提案数：◯◯</p>
+                    </div>
+                  </div>
+                </div>
+              </div>   
+              <% end %>
+            </div>
+          </div>
+          
+        </div>
       </div>
       
      </div>

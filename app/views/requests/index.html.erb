@@ -32,29 +32,32 @@
                     <h5 class="card-title"><%= request.title %></h5>
                   <% end %>
                     <h6 class="card-subtitle mb-2 text-muted"><%= request.user.username %></h6>
-                    <p class="card-text small"><%= request.text %> </p>
+                  
+                    <!--<p class="card-text small">request.text </p>-->
                     <div style="background: #43acff;">
                       <p class="card-text small py-1 px-1 mb-1" style="color: white;">予算：<%= request.budget %></p>
                     </div>
                     <div style="background: #43acff;">
-                      <p class="card-text small py-1 px-1 mb-1" style="color: white;">提案数：◯◯</p>
+                      <p class="card-text small py-1 px-1 mb-1" style="color: white;">提案数：<%= request.proposals.count %></p>
                     </div>
-                    <div style="background: #43acff;">
-                      <p class="card-text small py-1 px-1" style="color: white;">お気に入り：
+                    <div class="text-right">
                       <% if current_user.already_favorited?(request) %>
-                        <%= link_to 'いいねを外す', request_favorite_path(request), method: :delete %>
+                        <% favorite = current_user.favorites.find_by(request_id: request.id) %>
+                        <%= link_to  request_favorite_path(request, favorite), method: :delete do %>
+                          <i class="fas fa-heart"></i>
+                        <% end %>
                         <% else %>
-                        <%= link_to "いいね",request_favorites_path(request), method: :post %>
+                        <%= link_to request_favorites_path(request), method: :post do%>
+                        <i class="far fa-heart"></i>
+                        <% end %>
                       <% end %>
                       <%= request.favorites.count %>
-                      </p>
                     </div>
                   </div>
                 </div>
               </div>
               <% end %>
             </div>
-            
           </div>
         </div>
       </div>

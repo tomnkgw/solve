@@ -17,11 +17,25 @@
               <div class="detail-title px-2 py-2">
                 <p class="mb-0" style="font-weight: bold;"><%= @request.title %></p>
               </div>
-                <div class="row ml-2">
-                  <div class="col-5 mx-2 my-2" style="background: #f4f8fa;">予算：<%= @request.budget %></div>
-                  <div class="col-5 mx-2 my-2" style="background: #f4f8fa;">提案数：</div><br>
-                  <p class="my-3 px-1"><%= simple_format @request.text %></p>
+              <div class="row ml-2">
+                <div class="col-5 mx-2 my-2" style="background: #f4f8fa;">予算：<%= @request.budget %></div>
+                <div class="col-5 mx-2 my-2" style="background: #f4f8fa;">提案数：</div><br>
+                <p class="my-3 px-1"><%= simple_format @request.text %></p><br>
+                <div class="container w-100"></div>
+                  <div class="text-center">
+                    <% if current_user.already_favorited?(@request) %>
+                      <% favorite = current_user.favorites.find_by(request_id: @request.id) %>
+                      <%= link_to  request_favorite_path(@request, favorite), method: :delete do %>
+                        <i class="fas fa-heart"></i>
+                      <% end %>
+                    <% else %>
+                      <%= link_to request_favorites_path(@request), method: :post do%>
+                        <i class="far fa-heart"></i>
+                      <% end %>
+                    <% end %>
+                  </div>
                 </div>
+              </div>
                 <% if @request.user.id == current_user.id %>
                 <div class="text-center">
                 　<%= link_to "編集する", edit_request_path(@request), class:"btn btn-info mb-2"%>
