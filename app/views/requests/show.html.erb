@@ -27,10 +27,12 @@
                       <% favorite = current_user.favorites.find_by(request_id: @request.id) %>
                       <%= link_to  request_favorite_path(@request, favorite), method: :delete do %>
                         <i class="fas fa-heart"></i>
+                        <%= @request.favorites.count %>
                       <% end %>
                     <% else %>
                       <%= link_to request_favorites_path(@request), method: :post do%>
                         <i class="far fa-heart"></i>
+                        <%= @request.favorites.count %>
                       <% end %>
                     <% end %>
                   </div>
@@ -52,10 +54,11 @@
                     </div>
                     <% @request.proposals.each do |proposal|%>
                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                      <div class="card-body">
-                        <div class="form-group py-2 px-2 my-3" style="border: solid 1px;">
+                      <div class="card-body px-0">
+                        <div class="form-group" style="border: solid 1px;">
                           <label for="exampleFormControlTextarea1"></label>
-                          <p class="my-4"><%= proposal.text%> </p>
+                          <p class="my-2">予算：<%= proposal.budget %></p>
+                          <p class="my-2"><%= proposal.text %></p>
                           <div class="text-center">
                             <button type="button" class="btn btn-info px-4 mb-2"><span style="font-weight: bold;"><%= proposal.user.username %></span>さんにメッセージを送る</button>
                           </div>

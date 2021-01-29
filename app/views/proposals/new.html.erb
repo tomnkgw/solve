@@ -16,9 +16,9 @@
               <div class="form-group py-2">
                 
                 <%= form_for @proposal, url: request_proposals_path(@request) do |f| %>
-                <%= f.number_field :budget %>
-                <label for="exampleFormControlTextarea1"><span style="font-weight: bold;"><%= @request.user.username %></span> さんにメッセージを送る</label>
-                <%= f.text_area :text, class:"form-control w-75 my-2", rows:"15" %>
+                <label for="exampleFormControlTextarea1"><span style="font-weight: bold;"><%= @request.user.username %></span> さんにメッセージを送る</label><br>
+                <p>予算：<%= f.number_field :budget, class:"w-50",placeholder:"数字で入力してください" %></p>
+                <%= f.text_area :text, class:"form-control w-75 my-2", rows:"15",placeholder:"提案の詳細を入力してください" %>
                 
                 <div class="text-center w-75">
                    <%= f.submit "提案する", class:"btn btn-info" %>

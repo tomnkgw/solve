@@ -4,6 +4,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     favorites = Favorite.where(user_id: current_user.id).pluck(:request_id)
     @favorite_list = Request.find(favorites)
+    
+    proposals = Proposal.where(user_id: current_user.id).pluck(:request_id)
+    @proposal_list = Request.find(proposals)
   end
 
   def edit

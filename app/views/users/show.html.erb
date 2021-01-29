@@ -28,7 +28,7 @@
           
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active px-3 py-2" id="home" role="tabpanel" aria-labelledby="home-tab"><%= @user.profile %></div>
-            
+          <% if @user.id == current_user.id %>
           <div class="tab-pane fade px-3 py-2" id="request" role="tabpanel" aria-labelledby="request-tab">
             <div class="row">
               <% @user.requests.each do |request|%>
@@ -54,7 +54,27 @@
           </div>
           
           <div class="tab-pane fade show active px-3 py-2" id="proposal" role="tabpanel" aria-labelledby="proposal-tab">
-            
+            <div class="row">
+              <% @proposal_list.each do |proposal|%>   
+              <div class="col-md-5">
+                <div class="card w-75 mx-auto my-3">  
+                  <div class="card-body">
+                    <%= link_to request_path(proposal) do %>
+                    <h5 class="card-title"><%= proposal.title %></h5>
+                  <% end %>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= proposal.user.username %></h6>
+                    <!--<p class="card-text small">post.text </p>-->
+                    <div style="background: #43acff;">
+                      <p class="card-text small py-1 px-1 mb-1" style="color: white;">予算：<%= proposal.budget %></p>
+                    </div>
+                    <div style="background: #43acff;">
+                      <p class="card-text small py-1 px-1" style="color: white;">提案数：◯◯</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <% end %>
+            </div>
           </div>
           
           <div class="tab-pane fade px-3 py-2" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
@@ -80,9 +100,8 @@
               <% end %>
             </div>
           </div>
-          
+          <% end %>
         </div>
       </div>
-      
      </div>
     </div>
