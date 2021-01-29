@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_26_101607) do
+ActiveRecord::Schema.define(version: 2021_01_29_113257) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
@@ -39,6 +39,16 @@ ActiveRecord::Schema.define(version: 2021_01_26_101607) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer "proposal_id", null: false
+    t.integer "request_id", null: false
+    t.datetime "latest_message_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proposal_id"], name: "index_rooms_on_proposal_id"
+    t.index ["request_id"], name: "index_rooms_on_request_id"
   end
 
   create_table "users", force: :cascade do |t|
