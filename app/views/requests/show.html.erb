@@ -64,7 +64,9 @@
                               <button type="button" class="btn btn-danger px-4 mb-2 ml-2">この提案を見送る</button>
                             </div>
                             <div class="col-6 text-right">
-                              <button type="button" class="btn btn-info px-4 mb-2 mr-2"><span style="font-weight: bold;"><%= proposal.user.username %></span>さんにメッセージを送る</button>
+                            　<%= link_to rooms_path(request_id: @request.id, proposal_id: proposal.id), method: :post do %>
+                              <button type="button" class="btn btn-info px-4 mb-2"><span style="font-weight: bold;"><%= proposal.user.username %></span>さんにメッセージを送る</button>
+                            　<% end %>
                             </div>
                           </div>
                         </div>

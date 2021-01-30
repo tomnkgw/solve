@@ -1,29 +1,23 @@
-    <div class="container my-5"> 
-      <h1 class="text-center mb-4">メッセージ一覧</h1>
-      <table class="table table-bordered">
-        <thead style="background: #17a2b8; color: white;">
-          <tr>
-            <th scope="col">アイコン/ユーザー名</a></th>              
-            <th scope="col">依頼のタイトル</th>
-            <th scope="col">最新日時</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Mark</td>
-            <td><a href="#">依頼のタイトルがここに入る</a></td>
-            <td>送受信日時</td>
-          </tr>
-          <tr>
-            <td>Jacob</td>
-            <td><a href="#">依頼のタイトルがここに入る</a></td>
-            <td>送受信日時</td>
-          </tr>
-          <tr>
-            <td>larry</td>
-            <td><a href="#">依頼のタイトルがここに入る</a></td>
-            <td>送受信日時</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="container my-5"> 
+  <h1 class="text-center mb-4">メッセージ一覧</h1>
+  <table class="table table-bordered">
+    <thead style="background: #17a2b8; color: white;">
+      <tr>
+        <th scope="col">アイコン/ユーザー名</a></th>              
+        <th scope="col">依頼のタイトル</th>
+        <th scope="col">最新日時</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+          <td><%= room.request.user == current_user ? room.proposal.user.username : room.request.user.username %></td>
+          <td><a href="#"><%= room.request.title %></a></td>
+          <td><%= room.latest_message_created_at.present? ? room.latest_message_created_at.strftime("%Y/%m/%d %H:%M") : '' %></td>
+          <td><%= link_to 'メッセージを見る', room_path(room) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
