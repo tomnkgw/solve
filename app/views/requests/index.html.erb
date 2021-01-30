@@ -45,12 +45,12 @@
                         <% favorite = current_user.favorites.find_by(request_id: request.id) %>
                         <%= link_to  request_favorite_path(request, favorite), method: :delete do %>
                           <i class="fas fa-heart"></i>
-                          <%= request.proposals.count %>
+                          <%= request.favorites.count %>
                         <% end %>
                         <% else %>
                         <%= link_to request_favorites_path(request), method: :post do%>
                         <i class="far fa-heart"></i>
-                        <%= request.proposals.count %>
+                        <%= request.favorites.count %>
                         <% end %>
                       <% end %>
                       

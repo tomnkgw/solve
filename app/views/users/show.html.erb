@@ -27,7 +27,7 @@
         </ul>
           
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active px-3 py-2" id="home" role="tabpanel" aria-labelledby="home-tab"><%= @user.profile %></div>
+          <div class="tab-pane fade show px-3 py-2" id="home" role="tabpanel" aria-labelledby="home-tab"><%= @user.profile %></div>
           <% if @user.id == current_user.id %>
           <div class="tab-pane fade px-3 py-2" id="request" role="tabpanel" aria-labelledby="request-tab">
             <div class="row">
@@ -53,7 +53,7 @@
             </div>
           </div>
           
-          <div class="tab-pane fade show active px-3 py-2" id="proposal" role="tabpanel" aria-labelledby="proposal-tab">
+          <div class="tab-pane fade show px-3 py-2" id="proposal" role="tabpanel" aria-labelledby="proposal-tab">
             <div class="row">
               <% @proposal_list.each do |proposal|%>   
               <div class="col-md-5">

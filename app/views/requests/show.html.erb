@@ -60,7 +60,9 @@
                           <p class="my-2">予算：<%= proposal.budget %></p>
                           <p class="my-2"><%= proposal.text %></p>
                           <div class="text-center">
-                            <button type="button" class="btn btn-info px-4 mb-2"><span style="font-weight: bold;"><%= proposal.user.username %></span>さんにメッセージを送る</button>
+                            <%= link_to rooms_path(request_id: @request.id, proposal_id: proposal.id), method: :post do %>
+                              <button type="button" class="btn btn-info px-4 mb-2"><span style="font-weight: bold;"><%= proposal.user.username %></span>さんにメッセージを送る</button>
+                            <% end %>
                           </div>
                         </div>
                         <% end %>
