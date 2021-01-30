@@ -27,7 +27,7 @@
         </ul>
           
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active px-3 py-2" id="home" role="tabpanel" aria-labelledby="home-tab"><%= @user.profile %></div>
+          <div class="tab-pane fade show  px-3 py-2" id="home" role="tabpanel" aria-labelledby="home-tab"><%= @user.profile %></div>
           <% if @user.id == current_user.id %>
           <div class="tab-pane fade px-3 py-2" id="request" role="tabpanel" aria-labelledby="request-tab">
             <div class="row">
@@ -44,16 +44,16 @@
                       <p class="card-text small py-1 px-1 mb-1" style="color: white;">予算：<%= request.budget %></p>
                     </div>
                     <div style="background: #43acff;">
-                      <p class="card-text small py-1 px-1" style="color: white;">提案数：◯◯</p>
+                      <p class="card-text small py-1 px-1" style="color: white;">提案数：<%= request.proposals.count %></p>
                     </div>
                   </div>
                 </div>
-              </div>                
+              </div>   
               <% end %>
             </div>
           </div>
           
-          <div class="tab-pane fade show active px-3 py-2" id="proposal" role="tabpanel" aria-labelledby="proposal-tab">
+          <div class="tab-pane fade show  px-3 py-2" id="proposal" role="tabpanel" aria-labelledby="proposal-tab">
             <div class="row">
               <% @proposal_list.each do |proposal|%>   
               <div class="col-md-5">
@@ -68,7 +68,7 @@
                       <p class="card-text small py-1 px-1 mb-1" style="color: white;">予算：<%= proposal.budget %></p>
                     </div>
                     <div style="background: #43acff;">
-                      <p class="card-text small py-1 px-1" style="color: white;">提案数：◯◯</p>
+                      <p class="card-text small py-1 px-1" style="color: white;">提案数：%></p>
                     </div>
                   </div>
                 </div>
@@ -92,7 +92,7 @@
                       <p class="card-text small py-1 px-1 mb-1" style="color: white;">予算：<%= post.budget %></p>
                     </div>
                     <div style="background: #43acff;">
-                      <p class="card-text small py-1 px-1" style="color: white;">提案数：◯◯</p>
+                      <p class="card-text small py-1 px-1" style="color: white;">提案数：<%=%></p>
                     </div>
                   </div>
                 </div>

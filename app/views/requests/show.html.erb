@@ -59,8 +59,13 @@
                           <label for="exampleFormControlTextarea1"></label>
                           <p class="my-2">予算：<%= proposal.budget %></p>
                           <p class="my-2"><%= proposal.text %></p>
-                          <div class="text-center">
-                            <button type="button" class="btn btn-info px-4 mb-2"><span style="font-weight: bold;"><%= proposal.user.username %></span>さんにメッセージを送る</button>
+                          <div class="row">
+                            <div class="col-6 text-left">
+                              <button type="button" class="btn btn-danger px-4 mb-2 ml-2">この提案を見送る</button>
+                            </div>
+                            <div class="col-6 text-right">
+                              <button type="button" class="btn btn-info px-4 mb-2 mr-2"><span style="font-weight: bold;"><%= proposal.user.username %></span>さんにメッセージを送る</button>
+                            </div>
                           </div>
                         </div>
                         <% end %>
