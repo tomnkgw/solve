@@ -27,16 +27,16 @@
         </ul>
           
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show  px-3 py-2" id="home" role="tabpanel" aria-labelledby="home-tab"><%= @user.profile %></div>
+          <div class="tab-pane fade show active  px-3 py-2" id="home" role="tabpanel" aria-labelledby="home-tab"><%= @user.profile %></div>
           <% if @user.id == current_user.id %>
           <div class="tab-pane fade px-3 py-2" id="request" role="tabpanel" aria-labelledby="request-tab">
             <div class="row">
               <% @user.requests.each do |request|%>
               <div class="col-md-5">
-                <div class="card w-75 mx-auto my-3">
+                <div class="card mx-auto my-3">
                   <div class="card-body">
                     <%= link_to request_path(request) do %>
-                      <h5 class="card-title"><%= request.title %></h5>
+                      <h5 class="card-title textOverflow"><%= request.title %></h5>
                     <% end %>
                     <h6 class="card-subtitle mb-2 text-muted"><%= request.user.username %></h6>
                     <!--<p class="card-text small">request.text </p>-->
@@ -57,10 +57,10 @@
             <div class="row">
               <% @proposal_list.each do |proposal|%>   
               <div class="col-md-5">
-                <div class="card w-75 mx-auto my-3">  
+                <div class="card mx-auto my-3">  
                   <div class="card-body">
                     <%= link_to request_path(proposal) do %>
-                    <h5 class="card-title"><%= proposal.title %></h5>
+                    <h5 class="card-title textOverflow"><%= proposal.title %></h5>
                   <% end %>
                     <h6 class="card-subtitle mb-2 text-muted"><%= proposal.user.username %></h6>
                     <!--<p class="card-text small">post.text </p>-->
@@ -81,10 +81,10 @@
             <div class="row">
               <% @favorite_list.each do |post|%>
               <div class="col-md-5">
-                <div class="card w-75 mx-auto my-3">
+                <div class="card mx-auto my-3">
                   <div class="card-body">
                   <%= link_to request_path(post) do %>
-                    <h5 class="card-title"><%= post.title %></h5>
+                    <h5 class="card-title textOverflow"><%= post.title %></h5>
                   <% end %>
                     <h6 class="card-subtitle mb-2 text-muted"><%= post.user.username %></h6>
                     <!--<p class="card-text small">post.text </p>-->
