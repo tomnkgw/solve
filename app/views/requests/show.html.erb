@@ -3,7 +3,7 @@
         <div class="row py-5">
           <div class="left col-lg-4">
             <div class="text-center py-3" style="background: white;">
-              <img src="https://picsum.photos/150/150" alt="" class="mb-3">
+              <%= attachment_image_tag @user, :profile_image, fallback: "no-image.png",size:'200x200',style: "border-radius: 50%;"%>
               <p><%= @request.user.username%></p>
               <p>最終ログイン：</p>
               <%= link_to "プロフィール", user_path(@request.user), class:"btn btn-info w-75 mb-1"  %>

@@ -3,8 +3,8 @@
     <div class="row py-5">
       <div class="left col-md-4">
         <div class="text-center py-3" style="background: white;">
-          <img src="https://picsum.photos/150/150" alt="" class="mb-3">
-          <p>ユーザーネーム</p>
+          <%= attachment_image_tag current_user, :profile_image, fallback: "no-image.png",size:'200x200',style: "border-radius: 50%;"%>
+          <p><%= current_user.username %></p>
           <p>最終ログイン：</p>
           <button type="button" class="btn btn-info w-75 mb-3">プロフィール</button>
         </div>

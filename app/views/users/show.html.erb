@@ -1,7 +1,7 @@
     <div class="container">
      <div class="row">
       <div class="col-md-4 text-center py-3" style="background: white;">
-        <%= attachment_image_tag @user, :profile_image, fallback: "no-image.png"%>
+        <%= attachment_image_tag @user, :profile_image, fallback: "no-image.png",size:'200x200',style: "border-radius: 50%;"%>
         <p><%= @user.username %></p>
         <p>最終ログイン：</p>
         <% if @user.id == current_user.id %>
@@ -48,7 +48,7 @@
                     </div>
                   </div>
                 </div>
-              </div>   
+              </div> 
               <% end %>
             </div>
           </div>
@@ -61,19 +61,18 @@
                   <div class="card-body">
                     <%= link_to request_path(proposal) do %>
                     <h5 class="card-title textOverflow"><%= proposal.title %></h5>
-                  <% end %>
+                    <% end %>
                     <h6 class="card-subtitle mb-2 text-muted"><%= proposal.user.username %></h6>
-                    <!--<p class="card-text small">post.text </p>-->
                     <div style="background: #43acff;">
                       <p class="card-text small py-1 px-1 mb-1" style="color: white;">予算：<%= proposal.budget %></p>
                     </div>
                     <div style="background: #43acff;">
-                      <p class="card-text small py-1 px-1" style="color: white;">提案数：%></p>
+                      <p class="card-text small py-1 px-1" style="color: white;">提案数：<%=  %></p>
                     </div>
                   </div>
                 </div>
               </div>
-                <% end %>
+            <% end %>
             </div>
           </div>
           
@@ -92,7 +91,7 @@
                       <p class="card-text small py-1 px-1 mb-1" style="color: white;">予算：<%= post.budget %></p>
                     </div>
                     <div style="background: #43acff;">
-                      <p class="card-text small py-1 px-1" style="color: white;">提案数：<%=%></p>
+                      <p class="card-text small py-1 px-1" style="color: white;">提案数：<%=  %></p>
                     </div>
                   </div>
                 </div>

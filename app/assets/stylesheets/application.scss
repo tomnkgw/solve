@@ -15,6 +15,10 @@
  */
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+.img {
+    height: 125px;
+    width: 125px;
+}
 
 .profile_image {
     border-radius: 50%;
