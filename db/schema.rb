@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_30_033150) do
+ActiveRecord::Schema.define(version: 2021_02_12_111355) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "request_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "text", null: false
+    t.integer "user_id", null: false
+    t.integer "room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
   end
 
   create_table "proposals", force: :cascade do |t|

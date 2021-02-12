@@ -14,5 +14,7 @@ Rails.application.routes.draw do
     resources :proposals
     resources :favorites, only: [:create, :destroy]
   end
-  resources :rooms, only: [:index, :show, :create]
+  resources :rooms, only: [:index, :show, :create] do
+    resources :messages, only: [:create]
+  end
 end

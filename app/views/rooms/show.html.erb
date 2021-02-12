@@ -3,12 +3,24 @@
       <p>アイコン/ユーザー名</p>
       <h4>依頼のタイトル</h4>
     </div>
-    <div class="my-3 py-2" style="border: solid 1px; border-radius: 8px;">
-       <p class="text-left mb-0 px-2">初めまして</p>
-       <p class="text-right mb-0 px-2">送信日時</p> 
-    </div>
-    <div class="my-3 py-2" style="border: solid 1px; border-radius: 8px;  background-color: #ccc;">
-       <p class="text-left mb-0 px-2">初めまして</p>
-       <p class="text-right mb-0 px-2">送信日時</p>
-    </div>
+    <% @messages.each do |message| %>
+      <% if message.user == current_user %>
+        <div class="my-3 py-2" style="border: solid 1px; border-radius: 8px;  background-color: #ccc;">
+           <p class="text-left mb-0 px-2"><%= message.text %></p>
+           <p class="text-right mb-0 px-2"><%= message.created_at.strftime("%Y/%m/%d") %></p>
+        </div>
+      <% else %>
+        <div class="my-3 py-2" style="border: solid 1px; border-radius: 8px;">
+           <p class="text-left mb-0 px-2"><%= message.text %></p>
+           <p class="text-right mb-0 px-2"><%= message.created_at.strftime("%Y/%m/%d") %></p> 
+        </div>
+      <% end %>
+
+    <% end %>
+    <%= form_for @message, url: room_messages_path(@room) do |f| %>
+      <div class="form-group my-3">
+        <%= f.text_area :text, class:"w-100" %>
+      </div>
+      <%= f.submit "送信する", class:"btn btn-info" %>
+    <% end %>
 </div>
