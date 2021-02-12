@@ -1,4 +1,4 @@
-    <main style="background: #f4f8fa;" class="">
+    <main>
       <div class="container">
         <h2 class="pb-2 text-center py-4">募集中の依頼</h2>
           <div class="input-group d-flex justify-content-center pb-4">
@@ -36,12 +36,12 @@
                         <%= request.favorites.count %>
                         <% end %>
                       <% end %>
-                      
                     </div>
                   </div>
                 </div>
               </div>
               <% end %>
             </div>
+          <%= paginate @requests%>
       </div>
     </main>
