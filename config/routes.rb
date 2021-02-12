@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   root to: "home#index"
   resources :users
   resources :requests do
+    collection do
+      get 'search'
+    end
     resources :proposals
     resources :favorites, only: [:create, :destroy]
   end

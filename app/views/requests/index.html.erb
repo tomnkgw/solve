@@ -1,12 +1,12 @@
-    <main style="background: #f4f8fa;">
-      <div class="container py-5">
-            <h2 class="text-center pb-4">募集中の依頼</h2>
-            <div class="input-group mx-auto mb-5" style="width: 80%;">
-              <input type="text" class="form-control" placeholder="キーワードを入力してください">
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default">ボタン</button>
-              </span>
-            </div>
+    <main style="background: #f4f8fa;" class="">
+      <div class="container">
+        <h2 class="pb-2 text-center py-4">募集中の依頼</h2>
+          <div class="input-group d-flex justify-content-center pb-4">
+            <%= search_form_for @q, url: search_requests_path do |f| %>
+              <%= f.search_field :title_cont, placeholder:"キーワードを入力してください", :size =>"60%",class:"py-2" %>
+              <%= f.submit '検索', class:"btn btn-info" %>            
+            <% end %>
+          </div>
             
             <div class="row ">
             <% @requests.each do |request| %>
