@@ -47,7 +47,7 @@
 
       <section class="py-5">
         <div class="container">
-          <h3 class="text-center pb-3">新着の依頼</h3>
+          <h2 class="text-center pb-3">新着の依頼</h2>
             <div class="row ">
             <% @requests.each do |request| %>
               <div class="col-md-6">
@@ -61,7 +61,7 @@
                       <p class="card-text small py-1 px-1 mb-1" style="color: white;">予算：<%= request.budget %></p>
                     </div>
                     <div style="background: #43acff;">
-                      <p class="card-text small py-1 px-1" style="color: white;">提案数：◯◯</p>
+                      <p class="card-text small py-1 px-1" style="color: white;">提案数：<%= request.proposals.count %></p>
                     </div>
                   </div>
                 </div>

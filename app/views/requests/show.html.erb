@@ -80,7 +80,24 @@
                   <%= link_to "提案する", new_request_proposal_path(@request), class:"btn btn-info" %>
                 </div>
                 <% else %>
-                  <%= @proposal.text %>
+                
+                <div class="accordion" id="accordionExample">
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          自分の提案を確認する
+                        </button>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                          予算：<%= @proposal.budget %><br>
+                          <%= @proposal.text %>                          
+                        </div>
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+                    
+
                 <% end %>
           </div>
         </div>
