@@ -23,7 +23,7 @@
           <div class="text-center">
             <h2>SOLVE とは？</h2>
             <p class="mb-0">「お金を払ってでも解決したいことがあるユーザー」と「解決できるスキルや知識を持ったユーザー」をマッチング！</p>
-            <p>個人間取引(CtoC)でリーズナブルに依頼ができるサービスです。</p>
+            <p>個人間取引(CtoC)でラフでリーズナブルに依頼ができるサービスです。</p>
           </div>
           <div class="row text-center mt-5">
             <div class="col-md-4">
@@ -53,9 +53,15 @@
               <div class="col-md-6">
                 <div class="card w-75 mx-auto my-3">
                   <div class="card-body">
-                  <%= link_to request_path(request) do %>
-                    <h5 class="card-title textOverflow"><%= request.title %></h5>
-                  <% end %>
+                    <% if user_signed_in? %>
+                      <%= link_to request_path(request) do %>
+                        <h5 class="card-title textOverflow"><%= request.title %></h5>
+                      <% end %>
+                    <% else %>
+                      <%= link_to user_session_path do %>
+                        <h5 class="card-title textOverflow"><%= request.title %></h5>
+                      <% end %>
+                    <% end %>
                     <h6 class="card-subtitle mb-2 text-muted"><%= request.user.username %></h6>
                     <div style="background: #43acff;">
                       <p class="card-text small py-1 px-1 mb-1" style="color: white;">予算：<%= request.budget %></p>
