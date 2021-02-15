@@ -7,9 +7,8 @@ class RequestsController < ApplicationController
   end
 
   def show
-    @request = Request.find(params[:id])
-    @proposals = Proposal.all
-    @requests = Request.all
+    @request = Request.find(params[:id])    
+    @proposal = @request.proposals.find_by(user: current_user)
   end
 
   def new

@@ -75,10 +75,12 @@
                     </div>
                   </div>
                 </div>
-                <% else %>
+                <% elsif @proposal.nil? %>
                 <div class="text-center">
                   <%= link_to "提案する", new_request_proposal_path(@request), class:"btn btn-info" %>
                 </div>
+                <% else %>
+                  <%= @proposal.text %>
                 <% end %>
           </div>
         </div>
