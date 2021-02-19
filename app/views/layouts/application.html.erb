@@ -12,12 +12,12 @@
   <body>
   <% if flash[:notice] %>
     <div class="notification">
-      <p class="notice"><%= notice %></p>
+      <p class="notice my-0"><%= notice %></p>
     </div>  
   <% end %>
   <% if flash[:alert] %>
     <div class="notification">
-      <p class="alert"><%= alert %></p>
+      <p class="alert my-0"><%= alert %></p>
     </div>
   <% end %>
     
@@ -80,7 +80,9 @@
       </nav>
   </header>
   <% end %>
+  <main>
   <%= yield %>
+  </main>
   <footer  style="background: #f4f8fa;">
     <div class="container">
       <nav class="navbar navbar-light">

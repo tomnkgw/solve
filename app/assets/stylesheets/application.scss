@@ -14,6 +14,19 @@
  *= require_self
  */
 // Custom bootstrap variables must be set or imported *before* bootstrap.
+main {
+  min-height: calc(100vh - 120px);
+  overflow: hidden;
+}
+
+
+.notification {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: yellow;
+}
+
 @import "bootstrap";
 .img {
     height: 125px;
