@@ -2,6 +2,12 @@
     <div class="text-center">
       <p>アイコン/ユーザー名</p>
       <h4>依頼のタイトル</h4>
+      <% if @room.request.user == current_user && @room.proposal.proposing? %>
+         <%= form_for @room.proposal, url: proposal_confirm_request_path(@room.proposal), method: :patch, remote: false do |f| %>
+           <%= f.number_field :last_budget %>
+           <%= f.submit "確定を依頼する", class:"btn btn-info" %>
+         <% end %>
+      <% end %>
     </div>
     <% @messages.each do |message| %>
       <% if message.user == current_user %>
