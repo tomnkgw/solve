@@ -24,10 +24,27 @@ class ProposalsController < ApplicationController
     room = @proposal.room
     room.messages.create!(
       user: current_user,
-      text: '金額を確認して、確定してください'
+      text: "#{params['proposal']['last_budget']} 円で確定依頼が来ました　確定してください",
+      display_type: 'confirm_request'
     )
     
     redirect_to room_path(room)
+  end
+  
+  def confirm
+    @proposal = Proposal.find(params[:proposal_id])
+    @proposal.confirm!
+    
+    request = @proposal.request
+    request.confirm!
+    
+    room = @proposal.room
+    room.messages.create!(
+      user: current_user,
+      text: '確定しました'
+    )
+    
+    redirect_to room_path(room)  
   end
   
   private

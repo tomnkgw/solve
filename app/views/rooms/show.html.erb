@@ -18,6 +18,11 @@
       <% else %>
         <div class="my-3 py-2" style="border: solid 1px; border-radius: 8px;">
            <p class="text-left mb-0 px-2"><%= message.text %></p>
+           <% if message.confirm_request? %>
+             <%= form_for @room.proposal, url: proposal_confirm_path(@room.proposal), method: :patch, remote: false do |f| %>
+               <% f.submit 'confirm', class: 'btn btn-info' %>
+             <% end %>
+           <% end %>
            <p class="text-right mb-0 px-2"><%= message.created_at.strftime("%Y/%m/%d") %></p> 
         </div>
       <% end %>

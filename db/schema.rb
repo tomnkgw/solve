@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_19_112426) do
+ActiveRecord::Schema.define(version: 2021_02_19_120601) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2021_02_19_112426) do
     t.integer "room_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "display_type", default: 0, null: false
     t.index ["room_id"], name: "index_messages_on_room_id"
   end
 
