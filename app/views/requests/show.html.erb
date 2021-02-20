@@ -3,7 +3,7 @@
         <div class="row py-5">
           <div class="left col-lg-4">
             <div class="text-center py-3" style="background: white;">
-              <%= attachment_image_tag @user, :profile_image, fallback: "no-image.png",size:'200x200',style: "border-radius: 50%;"%>
+              <%= attachment_image_tag @request.user, :profile_image, fallback: "no-image.png",size:'200x200',style: "border-radius: 50%;"%>
               <p><%= @request.user.username%></p>
               <p>最終ログイン：</p>
               <%= link_to "プロフィール", user_path(@request.user), class:"btn btn-info w-75 mb-1"  %>
@@ -76,15 +76,15 @@
                 <% else %>
                 
                 <div class="accordion" id="accordionExample">
-                  <div class="card">
-                    <div class="card-header" id="headingOne">
                       <h5 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                           自分の提案を確認する
                         </button>
                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                          予算：<%= @proposal.budget %><br>
-                          <%= @proposal.text %>                          
+                         <div class="card">
+                           <div class="card-body px-0" style="border: solid 1px;">
+                             <div class="w-100 py-1 pl-2 proposal-txt" style="background: #f4f8fa;">予算：<%= @proposal.budget %>円</div>
+                              <p class="proposal-txt px-2 py-2"><%= @proposal.text %></p>                          
                         </div>
                       </h5>
                     </div>

@@ -3,17 +3,17 @@
   <table class="table table-bordered">
     <thead style="background: #17a2b8; color: white;">
       <tr>
-        <th scope="col-2">アイコン/ユーザー名</a></th>              
-        <th scope="col-4">依頼のタイトル</th>
-        <th scope="col-2">最新日時</th>
-        <th scope="col-2"></th>
+        <th scope="col" class="th1">アイコン/ユーザー名</a></th>              
+        <th scope="col" class="th2">依頼のタイトル</th>
+        <th scope="col" class="th1">最新日時</th>
+        <th scope="col" class="th1"></th>
       </tr>
     </thead>
     <tbody>
       <% @rooms.each do |room| %>
         <tr>
           <td><%= room.request.user == current_user ? room.proposal.user.username : room.request.user.username %></td>
-          <td><a href="#"><%= room.request.title %></a></td>
+          <td  class="textOverflow"><a href="#"><%= room.request.title %></a></td>
           <td><%= room.latest_message_created_at.present? ? room.latest_message_created_at.strftime("%Y/%m/%d %H:%M") : '' %></td>
           <td><%= link_to 'メッセージを見る', room_path(room) %></td>
         </tr>

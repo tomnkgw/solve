@@ -1,22 +1,27 @@
 <div class="container my-5">
     <div class="text-center">
-      <p>アイコン/ユーザー名</p>
-      <h4>依頼のタイトル</h4>
-      <% if @room.request.user == current_user && @room.proposal.proposing? %>
-         <%= form_for @room.proposal, url: proposal_confirm_request_path(@room.proposal), method: :patch, remote: false do |f| %>
-           <%= f.number_field :last_budget %>
-           <%= f.submit "確定を依頼する", class:"btn btn-info" %>
-         <% end %>
-      <% end %>
+      <p class="mb-3">依頼のタイトル<br><span style="font-weight: bold;"><%= @room.request.title %></span></p>
+      <p class="pb-1 mb-0">メッセージの相手：<span style="font-weight: bold;"><%= @room.proposal.user.username %></span></p>
+      
+      <div class="message-alert">
+        <% if @room.request.user == current_user && @room.proposal.proposing? %>
+           <%= form_for @room.proposal, url: proposal_confirm_request_path(@room.proposal), method: :patch, remote: false do |f| %>
+             <%= f.number_field :last_budget %>
+             <%= f.submit "確定依頼をする", class:"btn btn-info btn-sm" %>
+           <% end %>
+        <% end %>
+      </div>
+      
     </div>
+    
     <% @messages.each do |message| %>
       <% if message.user == current_user %>
-        <div class="my-3 py-2" style="border: solid 1px; border-radius: 8px;  background-color: #ccc;">
-           <p class="text-left mb-0 px-2"><%= message.text %></p>
-           <p class="text-right mb-0 px-2"><%= message.created_at.strftime("%Y/%m/%d") %></p>
+        <div class="mb-2 text-item1">
+           <p class="text-left"><%= message.text %></p>
+           <p class="text-right my-0"><%= message.created_at.strftime("%m/%d/%H:%M") %></p>
         </div>
       <% else %>
-        <div class="my-3 py-2" style="border: solid 1px; border-radius: 8px;">
+        <div class="my-3 py-2 text-item2">
            <p class="text-left mb-0 px-2"><%= message.text %></p>
            <% if message.confirm_request? %>
              <%= form_for @room.proposal, url: proposal_confirm_path(@room.proposal), method: :patch, remote: false do |f| %>
@@ -28,10 +33,12 @@
       <% end %>
 
     <% end %>
-    <%= form_for @message, url: room_messages_path(@room) do |f| %>
-      <div class="form-group my-3">
-        <%= f.text_area :text, class:"w-100" %>
-      </div>
-      <%= f.submit "送信する", class:"btn btn-info" %>
-    <% end %>
+    <div class="text-center">
+      <%= form_for @message, url: room_messages_path(@room) do |f| %>
+        <div class="form-group mb-0">
+          <%= f.text_area :text, class:"w-100 px-2", placeholder:"メッセージを入力してください", rows:"5" %>
+        </div>
+          <%= f.submit "送信する", class:"btn btn-info" %>
+      <% end %>
+    </div>
 </div>
