@@ -13,7 +13,9 @@
       <% @rooms.each do |room| %>
         <tr>
           <td><%= room.request.user == current_user ? room.proposal.user.username : room.request.user.username %></td>
-          <td  class="textOverflow"><a href="#"><%= room.request.title %></a></td>
+          <td><%= link_to request_path(room.request) do %>
+                <p><%= room.request.title%></p>
+              <% end %></td>
           <td><%= room.latest_message_created_at.present? ? room.latest_message_created_at.strftime("%Y/%m/%d %H:%M") : '' %></td>
           <td><%= link_to 'メッセージを見る', room_path(room) %></td>
         </tr>
