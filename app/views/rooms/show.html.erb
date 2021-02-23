@@ -5,7 +5,7 @@
       
         <% if @room.request.user == current_user && @room.proposal.proposing? %>
           <div class="message-alert mb-4 pt-1">
-            <p id="open" class="mb-1 pt-1 mx-auto " style="border: 1px solid #F7F7F7;">確定依頼の詳細をみる</p>
+            <p id="open" class="mb-1 mb-2 mx-auto " style="color: white; border-bottom: 1px solid #F7F7F7;">確定依頼の詳細をみる</p>
             <div id="mask" class="hidden"></div>
             <section id="modal" class="hidden">
               <p>ボタンを押すと、入力した金額での確定依頼メッセージが相手に送信され、<br>それ以降は金額の変更ができなくなります。<br><br>
@@ -15,10 +15,12 @@
               </div>
             </section>
             <%= javascript_include_tag('application.js') %>
+            
            <%= form_for @room.proposal, url: proposal_confirm_request_path(@room.proposal), method: :patch, remote: false do |f| %>
                <%= f.number_field :last_budget %>円
                <%= f.submit "確定依頼をする", class:"btn btn-info btn-sm" %>
            <% end %>
+           
           </div>
         <% end %>
       
@@ -32,13 +34,18 @@
         </div>
       <% else %>
         <div class="my-3 py-2 text-item2">
+          
            <p class="text-left mb-0 px-2"><%= message.text %></p>
            <% if message.confirm_request? %>
              <%= form_for @room.proposal, url: proposal_confirm_path(@room.proposal), method: :patch, remote: false do |f| %>
-               <% f.submit 'confirm', class: 'btn btn-info' %>
+               <%= f.submit 'confirm', class: 'btn btn-info' %>
              <% end %>
+             <%= form_for @room.proposal, url: proposal_proposing_path(@room.proposal), method: :patch, remote: false do |f| %>
+               <%= f.submit 'reject', class: 'btn btn-danger' %>
+             <% end %>             
            <% end %>
            <p class="text-right mb-0 px-2"><%= message.created_at.strftime("%Y/%m/%d") %></p> 
+           
         </div>
       <% end %>
 
