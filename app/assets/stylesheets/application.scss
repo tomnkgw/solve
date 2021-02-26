@@ -3,6 +3,15 @@ main {
   overflow: hidden;
 }
 
+.pagination {
+  justify-content: center;
+}
+
+
+.time {
+  font-size: 12px;
+}
+
 .notification {
   display: flex;
   justify-content: center;
@@ -56,6 +65,7 @@ h3 {
 .title {
   font-weight: bold;
 }
+
 
 
 // ===== rooms ここから ====

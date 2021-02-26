@@ -37,6 +37,9 @@
                 <% end %>
               <% end %>
             </div>
+            <div class="text-right time pt-2">
+              <%= request.created_at.to_s(:datetime_jp) %>
+            </div>
           </div>
         </div>
       </div>

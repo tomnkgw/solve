@@ -48,7 +48,7 @@
   <div class="container">
     <h2 class="text-center pb-3">新着の依頼</h2>
     <div class="row ">
-      <% @requests.each do |request| %>
+      <% @requests.last(8).reverse_each do |request| %>
         <div class="col-md-6">
           <div class="card mb-3">
             <div class="card-body">
@@ -67,6 +67,9 @@
               </div>
               <div style="background: #17a2b8;" class="mb-1 px-1 py-1">
                 <p class="card-text small" style="color: white;">提案数：<%= request.proposals.count %></p>
+              </div>
+              <div class="text-right time pt-2">
+                <%= request.created_at.to_s(:datetime_jp) %>
               </div>
             </div>
           </div>

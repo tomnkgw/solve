@@ -38,10 +38,22 @@
            <p class="text-left mb-0 px-2"><%= message.text %></p>
            <% if message.confirm_request? %>
              <%= form_for @room.proposal, url: proposal_confirm_path(@room.proposal), method: :patch, remote: false do |f| %>
-               <%= f.submit 'confirm', class: 'btn btn-info' %>
+               <%= f.submit '承諾する', class: 'btn btn-info', id:"ok" %>
+               <script>
+                  const ok = document.getElementById('ok');
+                  ok.addEventListener('click', function() {
+                    window.confirm('この依頼を承諾しますか？');
+                  })
+               </script>
              <% end %>
              <%= form_for @room.proposal, url: proposal_proposing_path(@room.proposal), method: :patch, remote: false do |f| %>
-               <%= f.submit 'reject', class: 'btn btn-danger' %>
+               <%= f.submit '差し戻す', class: 'btn btn-danger', id:"no" %>
+                <script>
+                  const no = document.getElementById('no');
+                  no.addEventListener('click', function() {
+                    window.confirm('提示金額を拒否しますか？');
+                  })
+               </script>
              <% end %>             
            <% end %>
            <p class="text-right mb-0 px-2"><%= message.created_at.strftime("%Y/%m/%d") %></p> 

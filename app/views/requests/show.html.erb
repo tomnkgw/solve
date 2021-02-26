@@ -1,99 +1,95 @@
-    <section style="background:  #f4f8fa;">
-      <div class="container">
-        <div class="row py-5">
-          <div class="left col-lg-4">
-            <div class="text-center py-3" style="background: white;">
-              <%= attachment_image_tag @request.user, :profile_image, fallback: "no-image.png",size:'200x200',style: "border-radius: 50%;"%>
-              <p><%= @request.user.username%></p>
-              <p>最終ログイン：</p>
-              <%= link_to "プロフィール", user_path(@request.user), class:"btn btn-info w-75 mb-1"  %>
-              <% if @request.user.id != current_user.id %>
-              <button type="button" class="btn btn-info w-75">提案する</button>
-              <% end %>
-            </div>
+<section style="background:  #f4f8fa;">
+  <div class="container">
+    <div class="row py-5">
+      <div class="left col-lg-4">
+        <div class="text-center py-3" style="background: white;">
+          <%= attachment_image_tag @request.user, :profile_image, fallback: "no-image.png",size:'200x200',style: "border-radius: 50%;"%>
+          <p><%= @request.user.username%></p>
+          <p>最終ログイン：</p>
+          <%= link_to "プロフィール", user_path(@request.user), class:"btn btn-info w-75 mb-1"  %>
+          <% if @request.user.id != current_user.id %>
+            <button type="button" class="btn btn-info w-75">提案する</button>
+          <% end %>
+        </div>
+      </div>
+      <div class="right col-lg-8" style="background: white;">
+        <div class="detail-top">
+          <div class="detail-title px-2 py-3">
+            <p class="mb-0" style="font-weight: bold;"><%= @request.title %></p>
           </div>
-          <div class="right col-lg-8" style="background: white;">
-            <div class="detail-top">
-              <div class="detail-title px-2 py-3">
-                <p class="mb-0" style="font-weight: bold;"><%= @request.title %></p>
-              </div>
-                <div class="w-100 py-1 pl-2" style="background: #f4f8fa;">予算：<%= @request.budget %></div>
-                <div class="w-100 py-1 pl-2 my-2" style="background: #f4f8fa;">提案数：<%= @request.proposals.count %></div>
-                <p class="px-2"><%= simple_format @request.text %></p>
-                  <div class="text-right pr-2 mb-2">
-                    <% if current_user.already_favorited?(@request) %>
-                      <% favorite = current_user.favorites.find_by(request_id: @request.id) %>
-                      <%= link_to  request_favorite_path(@request, favorite), method: :delete do %>
-                        <i class="fas fa-heart"></i>
-                        <%= @request.favorites.count %>
-                      <% end %>
-                    <% else %>
-                      <%= link_to request_favorites_path(@request), method: :post do%>
-                        <i class="far fa-heart"></i>
-                        <%= @request.favorites.count %>
-                      <% end %>
+          <div class="w-100 py-1 pl-2" style="background: #f4f8fa;">予算：<%= @request.budget %></div>
+          <div class="w-100 py-1 pl-2 my-2" style="background: #f4f8fa;">提案数：<%= @request.proposals.count %></div>
+          <p class="px-2"><%= simple_format @request.text %></p>
+          <div class="text-right pr-2 mb-2">
+            <% if current_user.already_favorited?(@request) %>
+              <% favorite = current_user.favorites.find_by(request_id: @request.id) %>
+              <%= link_to  request_favorite_path(@request, favorite), method: :delete do %>
+                <i class="fas fa-heart"></i>
+                <%= @request.favorites.count %>
+              <% end %>
+            <% else %>
+              <%= link_to request_favorites_path(@request), method: :post do%>
+                <i class="far fa-heart"></i>
+                <%= @request.favorites.count %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <% if @request.user.id == current_user.id %>
+        <div class="text-center">
+            <%= link_to "削除する", request_path(@request), method: :delete, data: {confirm: "削除しますか"}, class:"btn btn-danger mb-2" %>
+            <%= link_to "編集する", edit_request_path(@request), class:"btn btn-info mb-2"%>
+        </div>
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  提案を確認する(<%= @request.proposals.count %>件)
+                </button>
+              </h5>
+            </div>
+            <% @request.proposals.each do |proposal|%>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body px-0">
+                <div class="form-group" style="border: solid 1px;">
+                  <p class="text-center" style="background: #f4f8fa;"><span style="font-weight: bold;"><%= proposal.user.username %></span> さんから提案が届きました</p>
+                  <p class="px-2">予算：<%= proposal.budget %>円</p>
+                  <p class="px-2"><%= proposal.text %></p>
+                  <div class="text-center pb-2">
+                    <button type="button" class="btn btn-danger">この提案を見送る</button>
+                    <%= link_to rooms_path(request_id: @request.id, proposal_id: proposal.id), method: :post do %>
+                      <button type="button" class="btn btn-info">メッセージを送る</button>
                     <% end %>
                   </div>
+                </div>
               </div>
-                <% if @request.user.id == current_user.id %>
-                <div class="text-center">
-                　<%= link_to "削除する", request_path(@request), method: :delete, data: {confirm: "削除しますか"}, class:"btn btn-danger mb-2" %>
-                　<%= link_to "編集する", edit_request_path(@request), class:"btn btn-info mb-2"%>
-                </div>
-                <div class="accordion" id="accordionExample">
-                  <div class="card">
-                    <div class="card-header" id="headingOne">
-                      <h5 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                          提案を確認する(<%= @request.proposals.count %>件)
-                        </button>
-                      </h5>
-                    </div>
-                    <% @request.proposals.each do |proposal|%>
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                      <div class="card-body px-0">
-                        <div class="form-group" style="border: solid 1px;">
-                          <p class="text-center" style="background: #f4f8fa;"><span style="font-weight: bold;"><%= proposal.user.username %></span> さんから提案が届きました</p>
-                          <p class="px-2">予算：<%= proposal.budget %>円</p>
-                          <p class="px-2"><%= proposal.text %></p>
-                          <div class="text-center pb-2">
-                              <button type="button" class="btn btn-danger">この提案を見送る</button>
-                            　<%= link_to rooms_path(request_id: @request.id, proposal_id: proposal.id), method: :post do %>
-                              <button type="button" class="btn btn-info">メッセージを送る</button>
-                            　<% end %>
-                            </div>
-                          </div>
-                        </div>
-                        <% end %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <% elsif @proposal.nil? %>
-                <div class="text-center">
-                  <%= link_to "提案する", new_request_proposal_path(@request), class:"btn btn-info" %>
-                </div>
-                <% else %>
-                
-                <div class="accordion" id="accordionExample">
-                      <h5 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                          自分の提案を確認する
-                        </button>
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                         <div class="card">
-                           <div class="card-body px-0" style="border: solid 1px;">
-                             <div class="w-100 py-1 pl-2 proposal-txt" style="background: #f4f8fa;">予算：<%= @proposal.budget %>円</div>
-                              <p class="proposal-txt px-2 py-2"><%= @proposal.text %></p>                          
-                        </div>
-                      </h5>
-                    </div>
-                  </div>
-                </div>
-                    
-
-                <% end %>
+            <% end %>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+        <% elsif @proposal.nil? %>
+          <div class="text-center">
+            <%= link_to "提案する", new_request_proposal_path(@request), class:"btn btn-info" %>
+          </div>
+        <% else %>
+          <div class="accordion" id="accordionExample">
+            <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              自分の提案を確認する
+            </button>
+            </h5>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card">
+                <div class="card-body px-0 py-0" style="border: solid 1px;">
+                  <div class="w-100 pl-2 proposal-txt" style="background: #f4f8fa;">予算：<%= @proposal.budget %>円</div>
+                  <p class="proposal-txt px-2 py-2"><%= @proposal.text %></p>                          
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</section>

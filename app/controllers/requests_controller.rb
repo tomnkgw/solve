@@ -3,7 +3,7 @@ class RequestsController < ApplicationController
   
   def index
     @requests = Request.all
-    @requests = Request.page(params[:page]).per(4)
+    @requests = Request.page(params[:page]).order(id: "DESC").per(8)
   end
 
   def show
