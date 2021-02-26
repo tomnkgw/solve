@@ -4,5 +4,5 @@ class Request < ApplicationRecord
     has_many :favorites, dependent: :destroy
     has_many :rooms, dependent: :destroy
     
-    enum status: [:requesting, :confirm]
+    enum status: [:requesting, :confirm, :confirm_request]
 end

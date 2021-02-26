@@ -17,16 +17,23 @@ class ProposalsController < ApplicationController
   end
   
   def confirm_request
-    @proposal = Proposal.find(params[:proposal_id])
-    @proposal.last_budget = params['proposal']['last_budget']
-    @proposal.confirm_request!
     
+    @proposal = Proposal.find(params[:proposal_id])
+    request = @proposal.request
     room = @proposal.room
-    room.messages.create!(
-      user: current_user,
-      text: "<span style='font-weight: bold;'>#{params['proposal']['last_budget']}</span> 円で確定依頼が来ました　確認してください",
-      display_type: 'confirm_request',
-    )
+    request.with_lock do
+      raise unless request.requesting?
+      
+      @proposal.last_budget = params['proposal']['last_budget']
+      @proposal.confirm_request!
+      request.confirm_request!
+      
+      room.messages.create!(
+        user: current_user,
+        text: "<span style='font-weight: bold;'>#{params['proposal']['last_budget']}</span> 円で確定依頼が来ました　確認してください",
+        display_type: 'confirm_request',
+      )
+    end
     
     redirect_to room_path(room)
   end
@@ -50,6 +57,8 @@ class ProposalsController < ApplicationController
   def proposing
     @proposal = Proposal.find(params[:proposal_id])
     @proposal.proposing!
+    
+    @proposal.request.requesting!
     
     room = @proposal.room
     room.messages.create!(

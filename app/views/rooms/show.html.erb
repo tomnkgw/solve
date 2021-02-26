@@ -2,7 +2,7 @@
     <div class="text-center">
       <p class="mb-2" style="font-weight: bold;"><%= @room.request.title %></p>
       <p class="pb-1 mb-0">メッセージの相手：<span style="font-weight: bold;"><%= @room.request.user == current_user ? @room.proposal.user.username : @room.request.user.username %></span></p>
-        <% if @room.request.user == current_user && @room.proposal.proposing? %>
+        <% if @room.request.user == current_user && @room.proposal.proposing? && @room.proposal.request.requesting? %>
           <div class="message-alert mb-4 pt-1">
             <p id="open" class="mb-1 mb-2 mx-auto " style="color: white; border-bottom: 1px solid #F7F7F7;">確定依頼の詳細をみる</p>
             <div id="mask" class="hidden"></div>
