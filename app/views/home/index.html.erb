@@ -50,7 +50,7 @@
     <div class="row ">
       <% @requests.last(8).reverse_each do |request| %>
         <div class="col-md-6">
-          <div class="card mb-3">
+          <div class="card mb-3" style="<%= request.confirm? ? 'background-color: gray' : '' %>">
             <div class="card-body">
               <% if user_signed_in? %>
                 <%= link_to request_path(request) do %>
