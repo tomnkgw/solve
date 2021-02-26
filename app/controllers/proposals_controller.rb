@@ -24,7 +24,7 @@ class ProposalsController < ApplicationController
     room = @proposal.room
     room.messages.create!(
       user: current_user,
-      text: "#{params['proposal']['last_budget']} 円で確定依頼が来ました　確認してください",
+      text: "<span style='font-weight: bold;'>#{params['proposal']['last_budget']}</span> 円で確定依頼が来ました　確認してください",
       display_type: 'confirm_request',
     )
     

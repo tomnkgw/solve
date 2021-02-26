@@ -1,8 +1,7 @@
 <div class="container my-3">
     <div class="text-center">
       <p class="mb-2" style="font-weight: bold;"><%= @room.request.title %></p>
-      <p class="pb-1 mb-0">メッセージの相手：<span style="font-weight: bold;"><%= @room.proposal.user.username %></span></p>
-      
+      <p class="pb-1 mb-0">メッセージの相手：<span style="font-weight: bold;"><%= @room.request.user == current_user ? @room.proposal.user.username : @room.request.user.username %></span></p>
         <% if @room.request.user == current_user && @room.proposal.proposing? %>
           <div class="message-alert mb-4 pt-1">
             <p id="open" class="mb-1 mb-2 mx-auto " style="color: white; border-bottom: 1px solid #F7F7F7;">確定依頼の詳細をみる</p>
@@ -29,31 +28,19 @@
     <% @messages.each do |message| %>
       <% if message.user == current_user %>
         <div class="mb-2 text-item1">
-           <p class="text-left"><%= message.text %></p>
+           <p class="text-left"><%= message.text.html_safe %></p>
            <p class="text-right my-0"><%= message.created_at.strftime("%m/%d/%H:%M") %></p>
         </div>
       <% else %>
         <div class="my-3 py-2 text-item2">
           
-           <p class="text-left mb-0 px-2"><%= message.text %></p>
+           <p class="text-left mb-0 px-2"><%= message.text.html_safe %></p>
            <% if message.confirm_request? %>
              <%= form_for @room.proposal, url: proposal_confirm_path(@room.proposal), method: :patch, remote: false do |f| %>
-               <%= f.submit '承諾する', class: 'btn btn-info', id:"ok" %>
-               <script>
-                  const ok = document.getElementById('ok');
-                  ok.addEventListener('click', function() {
-                    window.confirm('この依頼を承諾しますか？');
-                  })
-               </script>
+               <%= f.submit '承諾する', class: 'btn btn-info', data: { confirm: "ほんまに承諾するで？"} %>
              <% end %>
              <%= form_for @room.proposal, url: proposal_proposing_path(@room.proposal), method: :patch, remote: false do |f| %>
-               <%= f.submit '差し戻す', class: 'btn btn-danger', id:"no" %>
-                <script>
-                  const no = document.getElementById('no');
-                  no.addEventListener('click', function() {
-                    window.confirm('提示金額を拒否しますか？');
-                  })
-               </script>
+               <%= f.submit '差し戻す', class: 'btn btn-danger', data: { confirm: "ほんまに差し戻しするで？"} %>
              <% end %>             
            <% end %>
            <p class="text-right mb-0 px-2"><%= message.created_at.strftime("%Y/%m/%d") %></p> 
