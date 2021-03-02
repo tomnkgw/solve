@@ -13,7 +13,9 @@
       <tbody>
         <% @rooms.each do |room| %>
           <tr>
-            <td style="<%= room.request.confirm? ? 'background-color: #bfbfbf' : '' %>"><%= room.request.user == current_user ? room.proposal.user.username : room.request.user.username %></td>
+            <td style="<%= room.request.confirm? ? 'background-color: #bfbfbf' : '' %>">
+              <%= attachment_image_tag room.proposal.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
+              <%= room.request.user == current_user ? room.proposal.user.username : room.request.user.username %></td>
             <td style="<%= room.request.confirm? ? 'background-color: #bfbfbf' : '' %>"><%= link_to request_path(room.request) do %>
                   <p><%= room.request.title%></p>
                 <% end %></td>

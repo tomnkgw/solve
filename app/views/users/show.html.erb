@@ -41,8 +41,8 @@
                     <div class="image mr-2 mb-2">
                       <%= attachment_image_tag request.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
                     </div>
-                    <h6 class="card-subtitle text-muted mb-2 clear"><%= request.user.username %></h6>
-                    <div style="background: #17a2b8;" class="mb-1 px-1 py-1">
+                    <h6 class="card-subtitle text-muted mb-2 pt-2"><%= request.user.username %></h6>
+                    <div style="background: #17a2b8;" class="mb-1 px-1 py-1 clear">
                       <p class="card-text small" style="color: white;">予算：<%= request.budget %></p>
                     </div>
                     <div style="background: #17a2b8;" class="mb-1 px-1 py-1">
@@ -74,11 +74,14 @@
                     <%= link_to request_path(proposal) do %>
                     <p class="card-title textOverflow py-1" style="font-weight: bold;"><%= proposal.title %></p>
                     <% end %>
+                    
+                    
                     <div class="image mr-2 mb-2">
                       <%= attachment_image_tag proposal.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
                     </div>
-                    <h6 class="card-subtitle text-muted mb-2 clear"><%= proposal.user.username %></h6>
-                    <div style="background: #17a2b8;" class="mb-1 px-1 py-1">
+                    <h6 class="card-subtitle text-muted mb-2 pt-2"><%= proposal.user.username %></h6>
+                    
+                    <div style="background: #17a2b8;" class="mb-1 px-1 py-1 clear">
                       <p class="card-text small" style="color: white;">予算：<%= proposal.budget %></p>
                     </div>
                     <div style="background: #17a2b8;" class="mb-1 px-1 py-1">
@@ -110,10 +113,14 @@
                   <%= link_to request_path(post) do %>
                     <p class="card-title textOverflow py-1" style="font-weight: bold;"><%= post.title %></p>
                   <% end %>
+                  
+                  
                     <div class="image mr-2 mb-2">
                       <%= attachment_image_tag post.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
                     </div>
-                    <h6 class="card-subtitle text-muted mb-2"><%= post.user.username %></h6>
+                    <h6 class="card-subtitle text-muted mb-2 pt-2"><%= post.user.username %></h6>
+                    
+                    
                     <div style="background: #17a2b8;" class="mb-1 px-1 py-1 clear">
                       <p class="card-text small" style="color: white;">予算：<%= post.budget %></p>
                     </div>
