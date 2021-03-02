@@ -1,6 +1,6 @@
     <div class="container">
      <div class="row">
-      <div class="col-md-4 text-center py-3" style="background: white;">
+      <div class="col-lg-4 text-center py-3" style="background: white;">
         <%= attachment_image_tag @user, :profile_image, fallback: "no-image.png",size:'200x200',style: "border-radius: 50%;"%>
         <p><%= @user.username %></p>
         <p>最終ログイン：</p>
@@ -8,7 +8,7 @@
         <%= link_to "プロフィールを編集する", edit_user_path(@user), class:"btn btn-info"%>
         <% end %>
       </div>
-      <div class="col-md-8">
+      <div class="col-lg-8">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">自己紹介</a>
@@ -38,7 +38,10 @@
                     <%= link_to request_path(request) do %>
                       <p class="card-title textOverflow py-1" style="font-weight: bold;"><%= request.title %></p>
                     <% end %>
-                    <h6 class="card-subtitle text-muted mb-2"><%= request.user.username %></h6>
+                    <div class="image mr-2 mb-2">
+                      <%= attachment_image_tag request.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
+                    </div>
+                    <h6 class="card-subtitle text-muted mb-2 clear"><%= request.user.username %></h6>
                     <div style="background: #17a2b8;" class="mb-1 px-1 py-1">
                       <p class="card-text small" style="color: white;">予算：<%= request.budget %></p>
                     </div>
@@ -71,7 +74,10 @@
                     <%= link_to request_path(proposal) do %>
                     <p class="card-title textOverflow py-1" style="font-weight: bold;"><%= proposal.title %></p>
                     <% end %>
-                    <h6 class="card-subtitle text-muted mb-2"><%= proposal.user.username %></h6>
+                    <div class="image mr-2 mb-2">
+                      <%= attachment_image_tag proposal.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
+                    </div>
+                    <h6 class="card-subtitle text-muted mb-2 clear"><%= proposal.user.username %></h6>
                     <div style="background: #17a2b8;" class="mb-1 px-1 py-1">
                       <p class="card-text small" style="color: white;">予算：<%= proposal.budget %></p>
                     </div>
@@ -104,8 +110,11 @@
                   <%= link_to request_path(post) do %>
                     <p class="card-title textOverflow py-1" style="font-weight: bold;"><%= post.title %></p>
                   <% end %>
+                    <div class="image mr-2 mb-2">
+                      <%= attachment_image_tag post.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
+                    </div>
                     <h6 class="card-subtitle text-muted mb-2"><%= post.user.username %></h6>
-                    <div style="background: #17a2b8;" class="mb-1 px-1 py-1">
+                    <div style="background: #17a2b8;" class="mb-1 px-1 py-1 clear">
                       <p class="card-text small" style="color: white;">予算：<%= post.budget %></p>
                     </div>
                     <div style="background: #17a2b8;" class="mb-1 px-1 py-1">

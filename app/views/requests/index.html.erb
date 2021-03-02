@@ -16,8 +16,13 @@
             <%= link_to request_path(request) do %>
               <p class="card-title textOverflow py-1" style="font-weight: bold;"><%= request.title %></p>
             <% end %>
-            <h6 class="card-subtitle text-muted mb-1"><%= request.user.username %></h6>
-            <div style="background: #17a2b8;" class="mb-1 px-1 py-1">
+            
+            <div class="image mr-2 mb-2">
+              <%= attachment_image_tag request.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
+            </div>
+            <h6 class="card-subtitle text-muted pt-2"><%= request.user.username %></h6>
+
+            <div style="background: #17a2b8;" class="mb-1 px-1 py-1 clear">
               <p class="card-text small" style="color: white;">予算：<%= request.budget %></p>
             </div>
             <div style="background: #17a2b8;" class="mb-1 px-1 py-1">
