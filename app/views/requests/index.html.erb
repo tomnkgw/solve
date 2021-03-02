@@ -11,7 +11,7 @@
   <div class="row ">
     <% @requests.each do |request| %>
       <div class="col-md-6">
-        <div class="card mb-3">
+        <div class="card mb-3" style="<%= request.confirm? ? 'background-color: #a7aaab' : '' %>">
           <div class="card-body">
             <%= link_to request_path(request) do %>
               <p class="card-title textOverflow py-1" style="font-weight: bold;"><%= request.title %></p>
@@ -37,8 +37,15 @@
                 <% end %>
               <% end %>
             </div>
-            <div class="text-right time pt-2">
-              <%= request.updated_at.to_s(:datetime_jp) %>
+            <div class="row">
+              <div class="col-6">
+                <% if request.confirm? %>
+                  <p style="color: red; font-weight: bold;" class="pt-2">成約済み</p>
+                <% end %>
+              </div>
+              <div class="text-right time pt-2 col-6">
+                <%= request.created_at.to_s(:datetime_jp) %>
+              </div>
             </div>
           </div>
         </div>
