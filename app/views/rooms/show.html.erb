@@ -1,5 +1,8 @@
 <div class="container my-3">
     <div class="text-center">
+      <% if @room.request.confirm? %>
+        <p class="confirm-msg">この依頼は依頼先が確定している為、新規で確定依頼のやりとりをすることはできません</p>
+      <% end %>
       <p class="mb-2" style="font-weight: bold;"><%= @room.request.title %></p>
       <p class="pb-1 mb-0">メッセージの相手：
       <%= attachment_image_tag @room.request.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
@@ -39,10 +42,10 @@
            <p class="text-left mb-0 px-2"><%= message.text.html_safe %></p>
            <% if message.confirm_request? %>
              <%= form_for @room.proposal, url: proposal_confirm_path(@room.proposal), method: :patch, remote: false do |f| %>
-               <%= f.submit '承諾する', class: 'btn btn-info', data: { confirm: "ほんまに承諾するで？"} %>
+               <%= f.submit '承諾する', class: 'btn btn-info', data: { confirm: "承認すると取引が成立し金額の変更ができなくなります。よろしいですか？"} %>
              <% end %>
              <%= form_for @room.proposal, url: proposal_proposing_path(@room.proposal), method: :patch, remote: false do |f| %>
-               <%= f.submit '差し戻す', class: 'btn btn-danger', data: { confirm: "ほんまに差し戻しするで？"} %>
+               <%= f.submit '差し戻す', class: 'btn btn-danger', data: { confirm: "差し戻しますか？"} %>
              <% end %>             
            <% end %>
            <p class="text-right mb-0 px-2"><%= message.created_at.strftime("%Y/%m/%d") %></p> 
