@@ -7,9 +7,6 @@
           <p><%= @request.user.username%></p>
           <p>最終ログイン：</p>
           <%= link_to "プロフィール", user_path(@request.user), class:"btn btn-info w-75 mb-1"  %>
-          <% if @request.user.id != current_user.id %>
-            <button type="button" class="btn btn-info w-75">提案する</button>
-          <% end %>
         </div>
       </div>
       <div class="right col-lg-8" style="background: white;">
@@ -37,8 +34,12 @@
         </div>
         <% if @request.user.id == current_user.id %>
         <div class="text-center">
-            <%= link_to "削除する", request_path(@request), method: :delete, data: {confirm: "削除しますか"}, class:"btn btn-danger mb-2" %>
-            <%= link_to "編集する", edit_request_path(@request), class:"btn btn-info mb-2"%>
+            <%= link_to request_path(@request), method: :delete do %>
+              <div class="btn btn-danger mb-2 <%= "none" if @request.confirm? %>" data= confirm: "削除しますか">削除する</div>
+            <% end %> 
+            <%= link_to edit_request_path(@request) do %>
+              <div class="btn btn-info mb-2 <%= "none" if @request.confirm? %>">編集する</div>
+            <% end %>
         </div>
         <div class="accordion" id="accordionExample">
           <div class="card">
@@ -57,9 +58,10 @@
                   <p class="px-2">予算：<%= proposal.budget %>円</p>
                   <p class="px-2"><%= proposal.text %></p>
                   <div class="text-center pb-2">
-                    <button type="button" class="btn btn-danger">この提案を見送る</button>
+                    
+                    <button type="button" class="btn btn-danger <%= "none" if @request.confirm? %>">この提案を見送る</button>
                     <%= link_to rooms_path(request_id: @request.id, proposal_id: proposal.id), method: :post do %>
-                      <button type="button" class="btn btn-info">メッセージを送る</button>
+                      <button type="button" class="btn btn-info <%= "none" if @request.confirm? %>">メッセージを送る</button>
                     <% end %>
                   </div>
                 </div>
@@ -71,7 +73,9 @@
       </div>
         <% elsif @proposal.nil? %>
           <div class="text-center">
-            <%= link_to "提案する", new_request_proposal_path(@request), class:"btn btn-info" %>
+            <%= link_to  new_request_proposal_path(@request) do %>
+              <div class="btn btn-info <%= "none" if @request.confirm? %>" data= confirm: "提案しますか">提案する</div>
+            <% end %>
           </div>
         <% else %>
           <div class="accordion" id="accordionExample">
