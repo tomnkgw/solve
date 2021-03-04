@@ -1,9 +1,26 @@
 <div class="container my-3">
     <div class="text-center">
       <% if @room.request.confirm? %>
-        <p class="confirm-msg">この依頼は依頼先が確定している為、新規で確定依頼のやりとりをすることはできません</p>
+        <p class="confirm-msg">この依頼は取引が成立している為、新規で確定依頼のやりとりをすることはできません</p>
       <% end %>
-      <p class="mb-2" style="font-weight: bold;"><%= @room.request.title %></p>
+      
+      <% if @room.proposal.confirm? && @room.proposal.user == current_user %>
+        <div class="complete-alert py-2">
+          <p style="color: white;" class="mb-0">依頼を実行完了したら、ボタンを押してください。</p>
+          <p id="open" class="mb-0 mx-auto " style="color: white; border-bottom: 1px solid #F7F7F7;">完了の詳細をみる</p>
+            <div id="mask" class="hidden"></div>
+            <section id="modal" class="hidden">
+              <p>依頼を実行完了したことが相手に通知されます。<br>相手が承認すると支払いが実行されます。</p>
+              <div id="close">
+                閉じる
+              </div>
+            </section>
+            <%= javascript_include_tag('application.js') %>
+          <div class="btn btn-secondary mt-2">完了</div>
+        </div>
+      <% end %>
+      
+      <p class="my-3" style="font-weight: bold;"><%= @room.request.title %></p>
       <p class="pb-1 mb-0">メッセージの相手：
       <%= attachment_image_tag @room.request.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
       <span style="font-weight: bold;"><%= @room.request.user == current_user ? @room.proposal.user.username : @room.request.user.username %></span></p>
@@ -41,14 +58,17 @@
           
            <p class="text-left mb-0 px-2"><%= message.text.html_safe %></p>
            <% if message.confirm_request? %>
-             <%= form_for @room.proposal, url: proposal_confirm_path(@room.proposal), method: :patch, remote: false do |f| %>
-               <%= f.submit '承諾する', class: 'btn btn-info', data: { confirm: "承認すると取引が成立し金額の変更ができなくなります。よろしいですか？"} %>
-             <% end %>
-             <%= form_for @room.proposal, url: proposal_proposing_path(@room.proposal), method: :patch, remote: false do |f| %>
-               <%= f.submit '差し戻す', class: 'btn btn-danger', data: { confirm: "差し戻しますか？"} %>
-             <% end %>             
+             <div class="example">
+               <%= form_for @room.proposal, url: proposal_confirm_path(@room.proposal), method: :patch, remote: false do |f| %>
+                 <%= f.submit '承諾する', class: 'btn btn-info',style:"float:left;", data: { confirm: "承認すると取引が成立し金額の変更ができなくなります。よろしいですか？"} %>
+               <% end %>
+               <%= form_for @room.proposal, url: proposal_proposing_path(@room.proposal), method: :patch, remote: false do |f| %>
+                 <%= f.submit '差し戻す', class: 'btn btn-danger',style:"float:right;", data: { confirm: "差し戻しますか？"} %>
+               <% end %>             
+             </div>
            <% end %>
-           <p class="text-right mb-0 px-2"><%= message.created_at.strftime("%Y/%m/%d") %></p> 
+               
+           <p class="text-right mb-0 px-2 clear"><%= message.created_at.strftime("%Y/%m/%d") %></p> 
            
         </div>
       <% end %>

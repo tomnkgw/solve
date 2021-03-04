@@ -3,5 +3,6 @@ class Proposal < ApplicationRecord
     belongs_to :user
     has_one :room
     
-    enum status: [:proposing, :confirm, :sorry, :confirm_request]
+    has_many :notifications, dependent: :destroy
+    enum status: [:proposing, :confirm, :confirm_request, :complete]
 end

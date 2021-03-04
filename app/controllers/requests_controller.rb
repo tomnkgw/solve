@@ -53,4 +53,5 @@ class RequestsController < ApplicationController
   def request_params
     params.require(:request).permit(:title, :budget, :text)
   end
+  
 end

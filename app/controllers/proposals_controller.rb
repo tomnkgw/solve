@@ -31,7 +31,7 @@ class ProposalsController < ApplicationController
       room.messages.create!(
         user: current_user,
         text: "<span style='font-weight: bold;'>#{params['proposal']['last_budget']}</span> 円で確定依頼が来ました　確認してください",
-        display_type: 'confirm_request',
+        display_type: 'confirm_request'
       )
     end
     
@@ -63,7 +63,7 @@ class ProposalsController < ApplicationController
     room = @proposal.room
     room.messages.create!(
       user: current_user,
-      text: '確定依頼を差し戻しました'
+      text: '確定依頼を差し戻しました',
       )
       
      redirect_to room_path(room)
