@@ -43,7 +43,7 @@
                 <%= link_to "依頼を受ける", requests_path, class:"nav-link"%>
               </li>
               <li class="nav-item"><%= link_to 'メッセージ', rooms_path, class: 'nav-link' %></li>
-              <li class="nav-item"><%= link_to '通知', notifications_path, class: 'nav-link' %></li> 
+              <li class="nav-item"><%= link_to "通知#{@unread_notification_count > 0 ? '(' + @unread_notification_count.to_s + ')' : ''}", notifications_path, class: 'nav-link' %></li> 
               <li class="nav-item">
                 <%= link_to "プロフィール", user_path(current_user), class:"nav-link"%>
               </li>

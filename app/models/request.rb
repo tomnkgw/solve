@@ -38,4 +38,34 @@ class Request < ApplicationRecord
       notification.save if notification.valid?
     end
   end
+  
+  def create_notification_confirm_request!(current_user, proposal_user_id)
+
+    notification = current_user.active_notifications.new(
+      request_id: id,
+      visited_id: proposal_user_id,
+      action: 'confirm_request'      
+    )
+    notification.save if notification.valid?
+  end
+  
+  def create_notification_complete_request!(current_user)
+
+    notification = current_user.active_notifications.new(
+      request_id: id,
+      visited_id: user_id,
+      action: 'complete_request'      
+    )
+    notification.save if notification.valid?
+  end
+  
+  def create_notification_complete!(current_user, proposal_user_id)
+
+    notification = current_user.active_notifications.new(
+      request_id: id,
+      visited_id: proposal_user_id,
+      action: 'complete'      
+    )
+    notification.save if notification.valid?
+  end
 end

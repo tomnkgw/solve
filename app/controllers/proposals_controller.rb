@@ -32,6 +32,8 @@ class ProposalsController < ApplicationController
       @proposal.confirm_request!
       request.confirm_request!
       
+      request.create_notification_confirm_request!(current_user, @proposal.user_id)
+      
       room.messages.create!(
         user: current_user,
         text: "<span style='font-weight: bold;'>#{params['proposal']['last_budget']}</span> 円で確定依頼が来ました　確認してください",
@@ -82,6 +84,8 @@ class ProposalsController < ApplicationController
     proposal = Proposal.find(params[:proposal_id])
     proposal.complete_request!
     room = proposal.room
+    
+    proposal.request.create_notification_complete_request!(current_user)
     room.messages.create!(
       user: current_user,
       text: '依頼内容を完了しました。完了ボタンを押すと相手に報酬が支払われます。',
@@ -95,6 +99,8 @@ class ProposalsController < ApplicationController
     @proposal.complete!
     message = Message.find(params[:proposal][:message_id])
     message.normal!
+    
+    @proposal.request.create_notification_complete!(current_user, @proposal.user_id)
     
     room = @proposal.room
     room.messages.create!(
