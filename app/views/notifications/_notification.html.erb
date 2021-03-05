@@ -12,5 +12,8 @@
           <%= link_to 'あなたの依頼', notification.request, style: "font-weight: bold;" %>にいいねしました
       <% end %>
     </span>
+    <div class="small text-muted text-right">
+      <%= time_ago_in_words(notification.created_at).upcase %>
+    </div>
   </div>
 </div>
