@@ -8,12 +8,15 @@
         <%= visitor.username %>
       <% end %>
       さんが
-      <% if notification.action == 'favorite' %>
-          <%= link_to 'あなたの依頼', notification.request, style: "font-weight: bold;" %>にいいねしました
+      <% case notification.action %>
+        <% when 'favorite' then %>
+          <%= link_to 'あなたの依頼', notification.request, style: "font-weight: bold;" %>を<span style="font-weight: bold;">お気に入り</span>しました
+        <% when 'proposal' then %>
+          <%= link_to 'あなたの依頼', notification.request, style: "font-weight: bold;" %>に<span style="font-weight: bold;">提案</span>しました
       <% end %>
     </span>
-    <div class="small text-muted text-right">
-      <%= time_ago_in_words(notification.created_at).upcase %>
-    </div>
+  </div>
+  <div class="small text-muted text-right">
+    <%= time_ago_in_words(notification.created_at).upcase %>
   </div>
 </div>

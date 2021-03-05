@@ -13,6 +13,10 @@ class ProposalsController < ApplicationController
     @proposal.user_id = current_user.id
     @proposal.status = 'proposing'
     @proposal.save
+    
+    @request = @proposal.request
+    @request.create_notification_proposal!(current_user, @proposal.id)
+    
     redirect_to request_path(params[:request_id])
   end
   

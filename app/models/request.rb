@@ -25,4 +25,17 @@ class Request < ApplicationRecord
     end
   end
   
+  def create_notification_proposal!(current_user, proposal_id)
+    # すでに「提案」されているか検索
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and request_id = ? and action = ? ", current_user.id, user_id, id, 'proposal'])
+    # 提案されていない場合のみ、通知レコードを作成
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        request_id: id,
+        visited_id: user_id,
+        action: 'proposal'
+      )
+      notification.save if notification.valid?
+    end
+  end
 end
