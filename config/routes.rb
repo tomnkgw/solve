@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     patch :confirm_request
     patch :confirm
     patch :proposing
+    patch :complete_request
+    patch :complete
   end
   resources :rooms, only: [:index, :show, :create] do
     resources :messages, only: [:create]

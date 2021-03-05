@@ -73,6 +73,29 @@ class ProposalsController < ApplicationController
      redirect_to room_path(room)
   end
   
+  def complete_request
+    @proposal = Proposal.find(params[:proposal_id])
+    room = @proposal.room
+    room.messages.create!(
+      user: current_user,
+      text: '依頼内容を完了しました。完了ボタンを押すと相手に報酬が支払われます。',
+      display_type: 'complete_request'
+    )
+    redirect_to room_path(room)  
+  end
+  
+  def complete
+    @proposal = Proposal.find(params[:proposal_id])
+    @proposal.complete!
+    
+    room = @proposal.room
+    room.messages.create!(
+      user: current_user,
+      text: '取引が完了しました。ありがとうございました！',
+    )
+    redirect_to room_path(room)  
+  end
+  
   private
   def proposal_params
     params.require(:proposal).permit(:text, :budget)

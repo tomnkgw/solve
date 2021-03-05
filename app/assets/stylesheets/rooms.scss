@@ -6,6 +6,11 @@
   color: white;
 }
 
+.complete-msg {
+  background: #dc3545;
+  color: white;
+}
+
 .table {
   table-layout: fixed;
 }
@@ -57,6 +62,7 @@
   height: 120px;
   width: 100%;
   background-color: #17a2b8;
+  // background-color: #dc3545;
 }
 
 #open {

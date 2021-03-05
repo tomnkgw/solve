@@ -1,25 +1,29 @@
 <div class="container my-3">
     <div class="text-center">
-      <% if @room.request.confirm? %>
-        <p class="confirm-msg">この依頼は取引が成立している為、新規で確定依頼のやりとりをすることはできません</p>
+      <% if @room.proposal.complete? %>
+        <p class="complete-msg">この依頼は取引が完了しています</p>
+      <% elsif @room.request.confirm? %>
+        <p class="confirm-msg mb-0">この依頼は取引が成立している為、新規で確定依頼のやりとりをすることはできません</p>
       <% end %>
       
-      <% if @room.proposal.confirm? && @room.proposal.user == current_user %>
-        <div class="complete-alert py-2">
-          <p style="color: white;" class="mb-0">依頼を実行完了したら、ボタンを押してください。</p>
-          <p id="open" class="mb-0 mx-auto " style="color: white; border-bottom: 1px solid #F7F7F7;">完了の詳細をみる</p>
-            <div id="mask" class="hidden"></div>
-            <section id="modal" class="hidden">
-              <p>依頼を実行完了したことが相手に通知されます。<br>相手が承認すると支払いが実行されます。</p>
-              <div id="close">
-                閉じる
-              </div>
-            </section>
-            <%= javascript_include_tag('application.js') %>
-          <div class="btn btn-secondary mt-2">完了</div>
-        </div>
-      <% end %>
-      
+        <% if @room.proposal.confirm? && @room.proposal.user == current_user %>
+          <div class="complete-alert py-2 <%= "none" if @msg.complete_request? %>">
+            <p style="color: white;" class="mb-0">依頼を実行完了したら、ボタンを押してください。</p>
+            <p id="open" class="mb-0 mx-auto " style="color: white; border-bottom: 1px solid #F7F7F7;">完了の詳細をみる</p>
+              <div id="mask" class="hidden"></div>
+              <section id="modal" class="hidden">
+                <p>依頼を実行完了したことが相手に通知されます。<br>相手が承認すると支払いが実行されます。</p>
+                <div id="close">
+                  閉じる
+                </div>
+              </section>
+              <%= javascript_include_tag('application.js') %>
+            <%= form_for @room.proposal, url: proposal_complete_request_path(@room.proposal), method: :patch, remote: false do |f| %>
+              <%= f.submit '完了', class: 'btn btn-secondary',data: { confirm: "依頼内容を実行完了した通知を相手に送ります。"} %>
+            <% end %>
+          </div>
+        <% end %>
+        
       <p class="my-3" style="font-weight: bold;"><%= @room.request.title %></p>
       <p class="pb-1 mb-0">メッセージの相手：
       <%= attachment_image_tag @room.request.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
@@ -66,6 +70,11 @@
                  <%= f.submit '差し戻す', class: 'btn btn-danger',style:"float:right;", data: { confirm: "差し戻しますか？"} %>
                <% end %>             
              </div>
+           <% end %>
+           <% if message.complete_request? %>
+              <%= form_for @room.proposal, url: proposal_complete_path(@room.proposal), method: :patch, remote: false do |f| %>
+                <%= f.submit '確認', class: 'btn btn-danger',data: { confirm: "確認すると取引が完了します？"} %>
+              <% end %>   
            <% end %>
                
            <p class="text-right mb-0 px-2 clear"><%= message.created_at.strftime("%Y/%m/%d") %></p> 
