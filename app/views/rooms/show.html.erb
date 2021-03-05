@@ -7,7 +7,7 @@
       <% end %>
       
         <% if @room.proposal.confirm? && @room.proposal.user == current_user %>
-          <div class="complete-alert py-2 <%= "none" if @msg.complete_request? %>">
+          <div class="complete-alert py-2">
             <p style="color: white;" class="mb-0">依頼を実行完了したら、ボタンを押してください。</p>
             <p id="open" class="mb-0 mx-auto " style="color: white; border-bottom: 1px solid #F7F7F7;">完了の詳細をみる</p>
               <div id="mask" class="hidden"></div>
@@ -64,15 +64,23 @@
            <% if message.confirm_request? %>
              <div class="example">
                <%= form_for @room.proposal, url: proposal_confirm_path(@room.proposal), method: :patch, remote: false do |f| %>
+                 <%= f.hidden_field :message_id, :value => message.id %>
+                 
                  <%= f.submit '承諾する', class: 'btn btn-info',style:"float:left;", data: { confirm: "承認すると取引が成立し金額の変更ができなくなります。よろしいですか？"} %>
+                 
                <% end %>
                <%= form_for @room.proposal, url: proposal_proposing_path(@room.proposal), method: :patch, remote: false do |f| %>
+               
+                 <%= f.hidden_field :message_id, :value => message.id %>
+                 
                  <%= f.submit '差し戻す', class: 'btn btn-danger',style:"float:right;", data: { confirm: "差し戻しますか？"} %>
                <% end %>             
              </div>
            <% end %>
            <% if message.complete_request? %>
               <%= form_for @room.proposal, url: proposal_complete_path(@room.proposal), method: :patch, remote: false do |f| %>
+                <%= f.hidden_field :message_id, :value => message.id %>
+              
                 <%= f.submit '確認', class: 'btn btn-danger',data: { confirm: "確認すると取引が完了します？"} %>
               <% end %>   
            <% end %>

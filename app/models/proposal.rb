@@ -4,5 +4,5 @@ class Proposal < ApplicationRecord
     has_one :room
     
     has_many :notifications, dependent: :destroy
-    enum status: [:proposing, :confirm, :confirm_request, :complete]
+    enum status: [:proposing, :confirm, :confirm_request, :complete, :complete_request]
 end

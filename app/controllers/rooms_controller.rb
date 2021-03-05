@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
     @messages = @room.messages
     
-    @msg = Message.find(params[:id])
+   
   end
 
   def create

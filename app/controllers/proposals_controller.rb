@@ -49,6 +49,9 @@ class ProposalsController < ApplicationController
     request = @proposal.request
     request.confirm!
     
+    message = Message.find(params[:proposal][:message_id])
+    message.normal!
+    
     room = @proposal.room
     room.messages.create!(
       user: current_user,
@@ -61,6 +64,8 @@ class ProposalsController < ApplicationController
   def proposing
     @proposal = Proposal.find(params[:proposal_id])
     @proposal.proposing!
+    message = Message.find(params[:proposal][:message_id])
+    message.normal!
     
     @proposal.request.requesting!
     
@@ -74,8 +79,9 @@ class ProposalsController < ApplicationController
   end
   
   def complete_request
-    @proposal = Proposal.find(params[:proposal_id])
-    room = @proposal.room
+    proposal = Proposal.find(params[:proposal_id])
+    proposal.complete_request!
+    room = proposal.room
     room.messages.create!(
       user: current_user,
       text: '依頼内容を完了しました。完了ボタンを押すと相手に報酬が支払われます。',
@@ -87,6 +93,8 @@ class ProposalsController < ApplicationController
   def complete
     @proposal = Proposal.find(params[:proposal_id])
     @proposal.complete!
+    message = Message.find(params[:proposal][:message_id])
+    message.normal!
     
     room = @proposal.room
     room.messages.create!(
