@@ -1,30 +1,7 @@
-<% visitor = notification.visitor %>
-<% visited = notification.visited %>
-
-<div class="container">
-  <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
-  
-  <% if notifications.exists? %>
-    <div class="col-md-6 mx-auto">
-      <div class="form-inline">
-        <span>
-          <%= visitor.name %>さんが
-          <% case notification.action %>
-            <% when 'favorite' then %>
-              <%= link_to 'あなたの依頼', notification.request, style:"font-weight: bold;" %>
-              にいいねしました
-            <% when 'proposal' then %>
-              <%= link_to 'あなたの依頼', notification.request, style:"font-weight: bold;" %>
-              に提案しました
-          <% end %>
-        </span>
-      </div>
-      <div class="small text-muted text-right">
-        <%= time_ago_in_words(notification.created_at).upcase %>
-      </div>
-    </div>
-    <%= paginate notifications %>
-  <% else %>
-    <p>通知はありません</p>
-  <% end %>
-</div>
+<% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+<% if notifications.exists? %>
+  <%= render notifications %>
+  <%= paginate notifications %>
+<% else %>
+  <p>通知はありません</p>
+<% end %>

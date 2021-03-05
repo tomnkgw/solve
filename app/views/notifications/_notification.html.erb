@@ -1,0 +1,16 @@
+<% visitor = notification.visitor %>
+<% visited = notification.visited %>
+
+<div class="col-md-6 mx-auto">
+  <div class="form-inline">
+    <span>
+      <%= link_to user_path(visitor) do %>
+        <%= visitor.username %>
+      <% end %>
+      さんが
+      <% if notification.action == 'favorite' %>
+          <%= link_to 'あなたの依頼', notification.request, style: "font-weight: bold;" %>にいいねしました
+      <% end %>
+    </span>
+  </div>
+</div>
