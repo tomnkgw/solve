@@ -1,31 +1,14 @@
     <main style="background: #f4f8fa;">
       <div class="container">
-        <div class="row">
-          <div class="col-2">
-            <nav class="navbar navbar-light">
-              <ul class="navbar-nav">
-                <li class="nav-item"><a href="" class="nav-link py-1 pl-4">マイページ</a></li>
-                <li class="nav-item"><a href="" class="nav-link py-1 pl-4">メッセージ</a></li>
-                <li class="nav-item"><a href="" class="nav-link py-1 pl-4">お気に入り</a></li>
-                <li class="nav-item"><a href="" class="nav-link py-1 pl-4">設定</a></li>
-                <li class="nav-item"><a href="" class="nav-link py-1 pl-4">ログアウト</a></li>
-              </ul>
-            </nav>  
-          </div>
-          <div class="col-10">
-              <div class="form-group py-2">
-                
-                <%= form_for @proposal, url: request_proposals_path(@request) do |f| %>
-                  <label for="exampleFormControlTextarea1"><span style="font-weight: bold;"><%= @request.user.username %></span> さんにメッセージを送る</label><br>
-                  <p>予算：<%= f.number_field :budget, class:"w-50",placeholder:"数字で入力してください" %></p>
-                  <%= f.text_area :text, class:"form-control w-75 my-2", rows:"15",placeholder:"提案の詳細を入力してください" %>
-                  
-                <div class="text-center w-75">
-                   <%= f.submit "提案する", class:"btn btn-info" %>
-                </div>
-                <% end %>
-              </div>
-          </div>
+        <div class="form-group py-2">
+          <%= form_for @proposal, url: request_proposals_path(@request) do |f| %>
+            <label for="exampleFormControlTextarea1"><span style="font-weight: bold;"><%= @request.user.username %></span> さんにメッセージを送る</label><br>
+            <p>予算：<%= f.number_field :budget, class:"w-25",placeholder:"数字で入力してください" %> 円</p>
+            <%= f.text_area :text, class:"form-control w-75 my-2", rows:"15",placeholder:"提案の詳細を入力してください" %>
+            <div class="text-center w-75">
+              <%= f.submit "提案する", class:"btn btn-info" %>
+            </div>
+          <% end %>
         </div>
-      </div>      
+      </div>
     </main>
