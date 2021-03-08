@@ -1,17 +1,17 @@
 <section>
-  <div class="container">
-    <div class="row py-2 px-3">
-      <div class="left col-md-6 pt-5">
+  <div class="container py-3">
+    <div class="row py-3 px-3">
+      <div class="left col-md-6 my-auto">
         <h1>あなたの悩みを<br>解決できる人を見つけよう</h1>
-        <p class="py-3">悩みがある人×解決できるスキルを持った人のマッチング(個人間取引)</p>
+        <p class="py-3 md_only">悩みがある人×解決できるスキルを持った人のマッチング<br>(個人間取引)</p>
         <% if user_signed_in? %>
-          <%= link_to "依頼をしてみる", new_request_path ,class:"brn btn-info btn-lg px-4"%>
+          <%= link_to "依頼をしてみる", new_request_path ,class:"btn btn-info btn-lg px-4"%>
         <% else %>
-          <%= link_to "いますぐはじめる", new_user_registration_path ,class:"brn btn-info btn-lg px-4"%>
+          <%= link_to "いますぐはじめる", new_user_registration_path ,class:"btn btn-info btn-lg px-4"%>
         <% end %>
       </div>
-      <div class="right col-md-6">
-        <img src= "/assets/top.png">
+      <div class="right col-md-6 py-3">
+        <img src= "/assets/top.png" class="w-100 only">
       </div>
     </div>
   </div>
