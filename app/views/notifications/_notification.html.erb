@@ -18,7 +18,11 @@
         <% when 'complete_request' then %>
           <%= link_to 'あなたの依頼', notification.request, style: "font-weight: bold;" %>を<span style="font-weight: bold;">完了</span>しました
         <% when 'complete' then %>
-          <%= link_to 'あなたの提案', notification.request, style: "font-weight: bold;" %>を<span style="font-weight: bold;">終了</span>しました   
+          <%= link_to 'あなたの提案', notification.request, style: "font-weight: bold;" %>が実行されたことを<span style="font-weight: bold;">確認</span>しました  
+        <% when 'reject' then %>
+          あなたの確定依頼を<span style="font-weight: bold;">差し戻し</span>ました
+        <% when 'confirm' then %>
+          あなたの確定依頼を<span style="font-weight: bold;">承諾</span>しました
       <% end %>
     </span>
   </div>

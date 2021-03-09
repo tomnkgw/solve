@@ -54,6 +54,8 @@ class ProposalsController < ApplicationController
     message = Message.find(params[:proposal][:message_id])
     message.normal!
     
+    @proposal.request.create_notification_confirm!(current_user)
+    
     room = @proposal.room
     room.messages.create!(
       user: current_user,
@@ -70,6 +72,7 @@ class ProposalsController < ApplicationController
     message.normal!
     
     @proposal.request.requesting!
+    @proposal.request.create_notification_reject!(current_user)
     
     room = @proposal.room
     room.messages.create!(

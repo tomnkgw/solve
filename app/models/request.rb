@@ -68,4 +68,24 @@ class Request < ApplicationRecord
     )
     notification.save if notification.valid?
   end
+  
+  def create_notification_reject!(current_user)
+
+    notification = current_user.active_notifications.new(
+      request_id: id,
+      visited_id: user_id,
+      action: 'reject'      
+    )
+    notification.save if notification.valid?
+  end
+  
+  def create_notification_confirm!(current_user)
+
+    notification = current_user.active_notifications.new(
+      request_id: id,
+      visited_id: user_id,
+      action: 'confirm'      
+    )
+    notification.save if notification.valid?
+  end
 end
