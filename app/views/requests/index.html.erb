@@ -1,7 +1,7 @@
 
 <div class="container">
-  <h2 class="pb-2 text-center py-4 text-info">募集中の依頼</h2>
-  <div class="input-group d-flex justify-content-center pb-4">
+  <h2 class="text-center mt-5 text-info">募集中の依頼</h2>
+  <div class="input-group d-flex justify-content-center pb-5">
     <%= search_form_for @q, url: search_requests_path do |f| %>
       <%= f.search_field :title_cont, placeholder:"キーワードを入力してください", :size =>"60%",class:"py-2" %>
       <%= f.submit '検索', class:"btn btn-info" %>            
@@ -58,4 +58,5 @@
     <% end %>
   </div>
   <%= paginate @requests%>
+  <div class="mb-5"></div>
 </div>

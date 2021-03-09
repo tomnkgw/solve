@@ -5,7 +5,6 @@
         <div class="text-center py-3">
           <%= attachment_image_tag @request.user, :profile_image, fallback: "no-image.png",size:'200x200',style: "border-radius: 50%;"%>
           <p><%= @request.user.username%></p>
-          <p>最終ログイン：</p>
           <%= link_to "プロフィール", user_path(@request.user), class:"btn btn-info w-75 mb-1"  %>
         </div>
       </div>
@@ -58,8 +57,6 @@
                   <p class="px-2">予算：<%= proposal.budget %>円</p>
                   <p class="px-2"><%= proposal.text %></p>
                   <div class="text-center pb-2">
-                    
-                    <button type="button" class="btn btn-danger <%= "none" if @request.confirm? %>">この提案を見送る</button>
                     <%= link_to rooms_path(request_id: @request.id, proposal_id: proposal.id), method: :post do %>
                       <button type="button" class="btn btn-info <%= "none" if @request.confirm? %>">メッセージを送る</button>
                     <% end %>

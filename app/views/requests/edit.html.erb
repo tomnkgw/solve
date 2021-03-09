@@ -3,25 +3,24 @@
         <div class="row py-5">
           <div class="left col-4">
             <div class="text-center py-3" style="background: white;">
-              <img src="https://picsum.photos/150/150" alt="" class="mb-3">
-              <p>ユーザーネーム</p>
-              <p>最終ログイン：</p>
-              <button type="button" class="btn btn-info w-75 mb-3">プロフィール</button>
+              <%= attachment_image_tag @request.user, :profile_image, fallback: "no-image.png",size:'200x200',style: "border-radius: 50%;"%>
+              <p><%= @request.user.username%></p>
+              <%= link_to "プロフィール", user_path(@request.user), class:"btn btn-info w-75 mb-1"  %>            
             </div>
           </div>
           <div class="right col-8 px-3" style="background: white;">
             <%= form_for @request do |f|%>
-            <h4 class="my-4 text-info">依頼を編集する</h4>
+            <h4 class="my-4 text-info" style="font-weight: bold;">依頼を編集する</h4>
               <div class="form-group my-3">
-                <%= f.label :"タイトル", class:"text-info" %><br>
+                <%= f.label :"依頼のタイトル:", class:"text-info" %><br>
                 <%= f.text_field :title, class:"w-100" %>
               </div>
               <div class="form-group my-3">
-                <%= f.label :"予算", class:"text-info" %><br>
+                <%= f.label :"予算:", class:"text-info" %><br>
                 <%= f.text_field :budget, class:"w-100" %>
               </div>
               <div class="form-group">
-                <%= f.label :"依頼の詳細", class:"text-info" %><br>
+                <%= f.label :"依頼の詳細:", class:"text-info" %><br>
                 <%= f.text_area :text, class:"w-100", rows:"15" %>
               </div>
   

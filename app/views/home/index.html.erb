@@ -54,11 +54,11 @@
             <div class="card-body">
               <% if user_signed_in? %>
                 <%= link_to request_path(request) do %>
-                  <p class="card-title textOverflow" style="font-weight: bold;"><%= request.title %></p>
+                  <p class="card-title textOverflow py-1" style="font-weight: bold;"><%= request.title %></p>
                 <% end %>
               <% else %>
                 <%= link_to user_session_path do %>
-                  <h5 class="card-title textOverflow" style="font-weight: bold;"><%= request.title %></h5>
+                  <h5 class="card-title textOverflow py-1" style="font-weight: bold;"><%= request.title %></h5>
                 <% end %>
               <% end %>
               <div class="image mr-2 mb-2 left">
@@ -75,7 +75,7 @@
               <div class="row">
                 <div class="col-6">
                   <% if request.confirm? %>
-                    <p style="color: red; font-weight: bold;" class="pt-2">成約済み</p>
+                    <p style="color: red; font-weight: bold; font-size: 12px;" class="pt-2 mb-0">成約済み</p>
                   <% end %>
                 </div>
                 <div class="text-right time pt-2 col-6">

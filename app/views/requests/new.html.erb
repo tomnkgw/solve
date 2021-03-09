@@ -13,16 +13,16 @@
         <h4 class="text-info" style="font-weight: bold;">依頼を作成する</h4>
           <%= form_for @request do |f| %>
             <div class="form-group my-3">
-                <%= f.label :"依頼のタイトル",class:"text-info" %><br>
-                <%= f.text_field :title,class:"w-100" %>
+                <%= f.label :"依頼のタイトル:",class:"text-info" %><br>
+                <%= f.text_field :title,class:"w-100",placeholder:"50文字以内で入力してください" %>
             </div>
             <div class="form-group my-3">
-                <%= f.label :"予算", class:"text-info" %><br>
-                <%= f.text_field :budget, class:"w-100" %>
+                <%= f.label :"予算:", class:"text-info" %><br>
+                <%= f.text_field :budget, class:"w-100",placeholder:"例:5000円〜10000円で健闘中" %>
             </div>
             <div class="form-group my-3">
-                <%= f.label :"依頼の詳細", class:"text-info" %><br>
-                <%= f.text_area :text, class:"w-100", rows:"15" %>
+                <%= f.label :"依頼の詳細:", class:"text-info" %><br>
+                <%= f.text_area :text, class:"w-100", rows:"15",placeholder:"出来るだけ詳しく記述してください" %>
             </div>
             <div class="text-center">
                 <%= f.submit "依頼を投稿する", class:"btn btn-info" %>
