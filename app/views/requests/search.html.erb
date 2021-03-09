@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="pb-2 text-center py-4">検索結果</h2>
+  <h2 class="pb-2 text-center py-4 text-info">検索結果</h2>
   <div class="row">
     <% @results.each do |request| %>
       <div class="col-md-6">
@@ -8,10 +8,10 @@
             <%= link_to request_path(request) do %>
               <h5 class="card-title textOverflow py-1" style="font-weight: bold;"><%= request.title %></h5>
             <% end %>
-            <div class="image mr-2 mb-2">
+            <div class="image mr-2 mb-2 left">
               <%= attachment_image_tag request.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
             </div>
-            <h6 class="card-subtitle text-muted mb-2 pt-2"><%= request.user.username %></h6>
+            <h6 class="card-subtitle text-muted mb-2 pt-2 left"><%= request.user.username %></h6>
             <div style="background: #17a2b8;" class="mb-1 px-1 py-1 clear">                  
               <p class="card-text small" style="color: white;">予算：<%= request.budget %></p>
             </div>

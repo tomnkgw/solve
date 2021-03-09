@@ -10,7 +10,7 @@
           <%= link_to "いますぐはじめる", new_user_registration_path ,class:"btn btn-info btn-lg px-4"%>
         <% end %>
       </div>
-      <div class="right col-md-6 py-3">
+      <div class="col-md-6 py-3">
         <img src= "/assets/top.png" class="w-100 only">
       </div>
     </div>
@@ -46,7 +46,7 @@
 
 <section class="py-5" style="background: white;">
   <div class="container">
-    <h2 class="text-center pb-3">新着の依頼</h2>
+    <h2 class="text-center pb-3 text-info">新着の依頼</h2>
     <div class="row ">
       <% @requests.last(8).reverse_each do |request| %>
         <div class="col-md-6">
@@ -61,10 +61,10 @@
                   <h5 class="card-title textOverflow" style="font-weight: bold;"><%= request.title %></h5>
                 <% end %>
               <% end %>
-              <div class="image mr-2 mb-2">
+              <div class="image mr-2 mb-2 left">
                 <%= attachment_image_tag request.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
               </div>
-              <h6 class="card-subtitle text-muted pt-2"><%= request.user.username %></h6>
+              <h6 class="card-subtitle text-muted pt-2 left"><%= request.user.username %></h6>
                 
               <div style="background: #17a2b8;" class="mb-1 px-1 py-1 clear">
                 <p class="card-text small" style="color: white;">予算：<%= request.budget %></p>

@@ -1,6 +1,6 @@
 
 <div class="container">
-  <h2 class="pb-2 text-center py-4">募集中の依頼</h2>
+  <h2 class="pb-2 text-center py-4 text-info">募集中の依頼</h2>
   <div class="input-group d-flex justify-content-center pb-4">
     <%= search_form_for @q, url: search_requests_path do |f| %>
       <%= f.search_field :title_cont, placeholder:"キーワードを入力してください", :size =>"60%",class:"py-2" %>
@@ -17,10 +17,10 @@
               <p class="card-title textOverflow py-1" style="font-weight: bold;"><%= request.title %></p>
             <% end %>
             
-            <div class="image mr-2 mb-2">
+            <div class="image mr-2 mb-2 left">
               <%= attachment_image_tag request.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
             </div>
-            <h6 class="card-subtitle text-muted pt-2"><%= request.user.username %></h6>
+            <h6 class="card-subtitle text-muted pt-2 left"><%= request.user.username %></h6>
 
             <div style="background: #17a2b8;" class="mb-1 px-1 py-1 clear">
               <p class="card-text small" style="color: white;">予算：<%= request.budget %></p>
