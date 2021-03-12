@@ -17,11 +17,10 @@
 //= require bootstrap-sprockets
 
 'use strict';
-{
-  const open = document.getElementById('open');
-  const close = document.getElementById('close');
-  const modal = document.getElementById('modal');
-  const mask = document.getElementById('mask');
+  var open = document.getElementById('open');
+  var close = document.getElementById('close');
+  var modal = document.getElementById('modal');
+  var mask = document.getElementById('mask');
 
   open.addEventListener('click', function () {
     modal.classList.remove('hidden');
@@ -35,4 +34,3 @@
     modal.classList.add('hidden');
     mask.classList.add('hidden');
   });
-}
