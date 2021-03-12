@@ -55,7 +55,7 @@
                 <div class="form-group" style="border: solid 1px;">
                   <p class="text-center" style="background: #f4f8fa;"><span style="font-weight: bold;"><%= proposal.user.username %></span> さんから提案が届きました</p>
                   <p class="px-2">予算：<%= proposal.budget %>円</p>
-                  <p class="px-2"><%= proposal.text %></p>
+                  <p class="px-2"><%= simple_format proposal.text %></p>
                   <div class="text-center pb-2">
                     <%= link_to rooms_path(request_id: @request.id, proposal_id: proposal.id), method: :post do %>
                       <button type="button" class="btn btn-info <%= "none" if @request.confirm? %>">メッセージを送る</button>
@@ -85,7 +85,7 @@
               <div class="card">
                 <div class="card-body px-0 py-0" style="border: solid 1px;">
                   <div class="w-100 pl-2 proposal-txt" style="background: #f4f8fa;">予算：<%= @proposal.budget %>円</div>
-                  <p class="proposal-txt px-2 py-2"><%= @proposal.text %></p>                          
+                  <p class="proposal-txt px-2 py-2"><%= simple_format @proposal.text %></p>                          
                 </div>
               </div>
             </div>

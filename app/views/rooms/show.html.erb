@@ -73,15 +73,16 @@
                
                  <%= f.hidden_field :message_id, :value => message.id %>
                  
-                 <%= f.submit '差し戻す', class: 'btn btn-danger',style:"float:right;", data: { confirm: "差し戻しますか？"} %>
+                 <%= f.submit '差し戻す', class: 'btn btn-danger ml-1',style:"float:left;", data: { confirm: "差し戻しますか？"} %>
                <% end %>             
              </div>
            <% end %>
            <% if message.complete_request? %>
               <%= form_for @room.proposal, url: proposal_complete_path(@room.proposal), method: :patch, remote: false do |f| %>
                 <%= f.hidden_field :message_id, :value => message.id %>
-              
-                <%= f.submit '確認', class: 'btn btn-danger',data: { confirm: "確認すると取引が完了します？"} %>
+
+                  <%= f.submit '確認', class: 'btn btn-danger',data: { confirm: "確認すると取引が完了します？"} %>
+
               <% end %>   
            <% end %>
                

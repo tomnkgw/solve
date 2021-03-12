@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "tokutei" => "home#tokutei"
   get "privacy" => "home#privacy"
   get "contact" => "home#contact"
+  get "guide" => "home#guide"
   resources :notifications, only: :index
   
   devise_for :users

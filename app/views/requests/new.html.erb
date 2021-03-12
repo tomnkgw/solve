@@ -1,15 +1,14 @@
 <section style="background:  #f4f8fa;;">
   <div class="container">
     <div class="row py-5">
-      <div class="left col-md-4">
+      <div class="left col-lg-4 my-1">
         <div class="text-center py-3" style="background: white;">
           <%= attachment_image_tag current_user, :profile_image, fallback: "no-image.png",size:'200x200',style: "border-radius: 50%;"%>
           <p><%= current_user.username %></p>
-          <p>最終ログイン：</p>
           <button type="button" class="btn btn-info w-75 mb-3">プロフィール</button>
         </div>
       </div>
-      <div class="right col-md-8 px-3 py-3" style="background: white;">
+      <div class="right col-lg-8 px-3 py-3 my-1" style="background: white;">
         <h4 class="text-info" style="font-weight: bold;">依頼を作成する</h4>
           <%= form_for @request do |f| %>
             <div class="form-group my-3">
@@ -18,7 +17,7 @@
             </div>
             <div class="form-group my-3">
                 <%= f.label :"予算:", class:"text-info" %><br>
-                <%= f.text_field :budget, class:"w-100",placeholder:"例:5000円〜10000円で健闘中" %>
+                <%= f.text_field :budget, class:"w-100",placeholder:"例:5000円〜10000円で検討中" %>
             </div>
             <div class="form-group my-3">
                 <%= f.label :"依頼の詳細:", class:"text-info" %><br>
