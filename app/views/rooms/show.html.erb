@@ -26,7 +26,11 @@
         
       <p class="my-3" style="font-weight: bold;"><%= @room.request.title %></p>
       <p class="pb-1 mb-0">メッセージの相手：
-      <%= attachment_image_tag @room.request.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
+      <% if @room.request.user == current_user %>
+        <%= attachment_image_tag @room.proposal.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
+      <% else %>
+        <%= attachment_image_tag @room.request.user, :profile_image, fallback: "no-image.png",size:'30x30',style: "border-radius: 50%;"%>
+      <% end %>  
       <span style="font-weight: bold;"><%= @room.request.user == current_user ? @room.proposal.user.username : @room.request.user.username %></span></p>
         <% if @room.request.user == current_user && @room.proposal.proposing? && @room.proposal.request.requesting? %>
           <div class="message-alert mb-4 pt-1">
