@@ -59,7 +59,7 @@
       <% if message.user == current_user %>
         <div class="mb-2 text-item1">
            <p class="text-left"><%= message.text.html_safe %></p>
-           <p class="text-right my-0"><%= message.created_at.strftime("%m/%d/%H:%M") %></p>
+           <p class="text-right my-0"><%= message.created_at.strftime("%-m/%d %H:%M") %></p>
         </div>
       <% else %>
         <div class="my-3 py-2 text-item2">
@@ -90,7 +90,7 @@
               <% end %>   
            <% end %>
                
-           <p class="text-right mb-0 px-2 clear"><%= message.created_at.strftime("%Y/%m/%d") %></p> 
+           <p class="text-right mb-0 px-2 clear"><%= message.created_at.strftime("%-m/%d %H:%M") %></p> 
            
         </div>
       <% end %>

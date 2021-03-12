@@ -39,7 +39,10 @@ class ProposalsController < ApplicationController
         text: "<span style='font-weight: bold;'>#{params['proposal']['last_budget']}</span> 円で確定依頼が来ました　確認してください",
         display_type: 'confirm_request'
       )
+      room.latest_message_created_at = Time.current
+      room.save
     end
+    
     
     redirect_to room_path(room)
   end
@@ -79,7 +82,8 @@ class ProposalsController < ApplicationController
       user: current_user,
       text: '確定依頼を差し戻しました',
       )
-      
+    room.latest_message_created_at = Time.current
+    room.save
      redirect_to room_path(room)
   end
   
@@ -94,6 +98,8 @@ class ProposalsController < ApplicationController
       text: '依頼内容を完了しました。完了ボタンを押すと相手に報酬が支払われます。',
       display_type: 'complete_request'
     )
+    room.latest_message_created_at = Time.current
+    room.save
     redirect_to room_path(room)  
   end
   
@@ -110,6 +116,8 @@ class ProposalsController < ApplicationController
       user: current_user,
       text: '取引が完了しました。ありがとうございました！',
     )
+    room.latest_message_created_at = Time.current
+    room.save
     redirect_to room_path(room)  
   end
   
