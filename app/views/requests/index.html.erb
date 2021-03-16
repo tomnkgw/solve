@@ -2,13 +2,17 @@
 <div class="container">
   <h2 class="text-center mt-5 text-info">募集中の依頼</h2>
   
-  <div class="input-group d-flex justify-content-center pb-5">
+  <div class="input-group d-flex justify-content-center">
     <%= search_form_for @q, url: search_requests_path do |f| %>
-      <%= f.search_field :title_cont, placeholder:"キーワードを入力してください", class:"py-2 form_size", size: "40%" %>
-      <%= f.submit '検索', class:"btn btn-info" %>            
-    <% end %>
+      <%= f.search_field :title_cont, placeholder:"キーワードを入力してください", class:"py-2 form_size left", size: "40%" %>
+      <div class="sm_only left">
+        <%= f.submit '検索', class:"btn btn-info mb-5" %>            
+      </div>
   </div>
-            
+  <div class="md_only text-center">
+    <%= f.submit '検索', class:"btn btn-info mt-1 mb-3" %> 
+  </div>
+    <% end %>
   <div class="row ">
     <% @requests.each do |request| %>
       <div class="col-md-6">
