@@ -10,14 +10,14 @@
   font-size: 1rem;
 }
 
-// @media (max-width :767px) {
-//   .sm_only {
-//     display: none;
-//   }
-// }
+@media (max-width :767px) {
+  .sm_only {
+    display: none;
+  }
+}
 
-// @media (min-width :768px)  {
-//   .md_only {
-//     display: none !important;
-//   }
-// }
+@media (min-width :768px)  {
+  .md_only {
+    display: none ;
+  }
+}
